@@ -1,0 +1,41 @@
+/* Footer.css */
+.footer-container {
+    background-color: #4A2C40; /* Dark purple background as in the image */
+    color: #fff; /* White text color */
+    padding: 20px 0; /* Padding for the footer */
+    border-top: 1px solid #ccc; /* Light border at the top */
+    /* margin-top: 1rem; */
+  }
+  
+  .footer-heading {
+    font-size: 1.1rem; /* Slightly smaller heading */
+    font-weight: bold; /* Bold headings */
+    text-transform: uppercase; /* Match the uppercase style */
+    margin-bottom: 15px; /* Space below the heading */
+  }
+  
+  .footer-text {
+    font-size: 0.9rem; /* Smaller font for copyright text */
+    line-height: 1.5; /* Line height for better readability */
+  }
+  
+  .footer-link {
+    color: #fff; /* White links */
+    text-decoration: none; /* Remove underline */
+    font-size: 0.9rem; /* Smaller font for links */
+    line-height: 2; /* Space between links */
+  }
+  
+  .footer-link:hover {
+    color: #ddd; /* Slightly lighter on hover */
+    text-decoration: underline; /* Add underline on hover */
+  }
+  
+  /* Ensure icons are white */
+  .footer-link svg {
+    color: #fff; /* White icons */
+  }
+  
+  .footer-link svg:hover {
+    color: #ddd; /* Slightly lighter on hover */
+  }
