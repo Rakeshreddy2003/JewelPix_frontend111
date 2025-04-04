@@ -5,7 +5,7 @@ import DesignUniqueCheck from './components/DesignUniqueCheck'
 import ImagePlaceholder from './components/ImagePlaceholder'
 import Navbars from './pages/Navbars.jsx'
 import Landingpage from './pages/Landingpage.jsx'
-import Footer from './pages/Footer.jsx'
+import Footer from './components/Footer.jsx'
 import JewelPixSearchBar from './pages/JewelPixSearchBar.jsx'
 function App() {
 

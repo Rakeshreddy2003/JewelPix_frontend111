@@ -1,72 +1,66 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Image from "react-bootstrap/Image";
+import React, { useState } from "react";
+import { Navbar, Container, Button, Offcanvas, Image } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import "./NavbarStyles.css";
+import Popup from "../components/Popup";
+
 const expand = false;
+
 const Navbars = () => {
+  const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
+
+  const navigateToSecurity = () => {
+    navigate("/security");
+  };
+
   return (
     <>
-      {" "}
-      <Navbar
-        key={expand}
-        expand={expand}
-        style={{ backgroundColor: "#507691" }}
-        className=" background"
-      >
-        <Container fluid>
-          <div><Navbar.Brand style={{color:"white"}} href="#">Jiwel pix</Navbar.Brand>
-          <Button variant="outline-light" className="me-2">
+      <Navbar key={expand} expand={expand} className="custom-navbar">
+        <Container fluid className="navbar-container">
+          <Navbar.Brand className="brand">Jiwel pix</Navbar.Brand>
+          <Button 
+            variant="outline-light" 
+            className="me-2" 
+            onClick={() => setShowPopup(true)}
+          >
             Upload
-          </Button></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          
-          <div>
-            <Button variant="outline-light" className="me-2">
+          </Button>
+          <div className="auth-buttons">
+            <Button variant="outline-light" className="me-2" onClick={navigateToSecurity}>
               Login
             </Button>
-            <Button variant="outline-light">Sign Up</Button>
+            <Button variant="outline-light" onClick={navigateToSecurity}>
+              Sign Up
+            </Button>
           </div>
-
-          <Navbar.Toggle style={{backgroundColor:"white"}} aria-controls={`offcanvasNavbar-expand-${expand}`} />
-
-          <Navbar.Offcanvas
-            id={`offcanvasNavbar-expand-${expand}`}
-            aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-            placement="end"
-          >
+          <Navbar.Toggle className="custom-toggle" aria-controls="offcanvasNavbar" />
+          <Navbar.Offcanvas id="offcanvasNavbar" placement="end" className="custom-offcanvas">
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                History
-              </Offcanvas.Title>
+              <Offcanvas.Title>User Profile</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Nav.Link href="#action1">Home</Nav.Link>
-                <Nav.Link href="#action2">Link</Nav.Link>
-              </Nav>
-              {/* <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form> */}
+              <div className="profile-section">
+                <Image src={"profileImage"} roundedCircle className="profile-img" />
+                <p className="username">User</p>
+              </div>
+              <div className="order-history">
+                <h5>Order History</h5>
+                <ul>
+                  <li>Recent Order 1</li>
+                  <li>Recent Order 2</li>
+                  <li>Recent Order 3</li>
+                  <li>Recent Order 4</li>
+                  <li>Recent Order 5</li>
+                </ul>
+              </div>
+              <Button className="logout-btn">Logout</Button>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
       </Navbar>
+
+      {showPopup && <Popup onClose={() => setShowPopup(false)} />}
     </>
   );
 };

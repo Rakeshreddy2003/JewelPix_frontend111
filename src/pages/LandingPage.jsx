@@ -7,8 +7,9 @@ import { Pagination } from 'react-bootstrap'
 const Landingpage = () => {
   return (
     <>
-    <div className='Herosection'><img src={bgImg} alt="" /></div>
-    <JewelPixSearchBar/>
+    <div className='Herosection'><img src={bgImg} alt="" />
+    <JewelPixSearchBar/></div>
+    
     <LandingCards/>
     <div className="pagination-div" style={{backgroundColor:"#3A1929",}}>
       <Pagination className="pagination-container">

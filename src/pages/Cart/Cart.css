@@ -1,0 +1,84 @@
+/* CheckoutPage.css */
+.checkout-page {
+    background-color: #f8f9fa; /* Light background for the page */
+  }
+  
+  .section-heading {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+  }
+  
+  .delivery-input {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+  }
+  
+  .price-details-card {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+  }
+  
+  .price-details-card span {
+    font-size: 1rem;
+  }
+  
+  .place-order-btn {
+    background-color: #ffc107; /* Yellow background for the button */
+    color: #000; /* Black text */
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .place-order-btn:hover {
+    background-color: #e0a800; /* Slightly darker yellow on hover */
+  }
+  
+  /* Adjust ProductCard for this context */
+  .product-card {
+    max-width: 250px; /* Smaller width for the checkout page */
+    border: none;
+    border-radius: 15px;
+    background-color: #f8f9fa;
+  }
+  
+  .product-image {
+    object-fit: cover;
+    height: 150px; /* Smaller image height */
+  }
+  
+  .product-name {
+    font-size: 0.9rem; /* Smaller font for the name */
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .product-price {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0;
+  }
+  
+  .stock-status {
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .checkout{
+    display: flex;
+  }
+
+  .text-end{
+    margin-top: 1rem;
+  }
