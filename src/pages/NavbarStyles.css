@@ -1,0 +1,73 @@
+/* Navbar Styles */
+.custom-navbar {
+    padding: 10px 15px;
+  }
+  
+  .brand {
+    color: white;
+    font-weight: bold;
+  }
+  
+  .auth-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .custom-toggle {
+    background-color: white;
+  }
+  
+  /* Offcanvas Styles */
+  .custom-offcanvas {
+    width: 300px;
+  }
+  
+  .profile-section {
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  .profile-img {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #507691;
+  }
+  
+  .username {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .order-history {
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    margin: 15px 0;
+  }
+  
+  .order-history h5 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .order-history ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .order-history li {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .logout-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(45deg, gold, brown);
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  

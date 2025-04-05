@@ -65,3 +65,33 @@
     display: flex;
     align-items: center;
   }
+
+  .popup-content {
+    text-align: center;
+    padding: 20px;
+    background-color: #542c41;
+    border-radius: 10px;
+  }
+  
+  .popup-button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #3b1e2c;
+    border: 2px solid gold;
+    color: white;
+    border-radius: 20px;
+    font-size: 16px;
+  }
+  
+  .done-button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 15px;
+    background: linear-gradient(to right, gold, brown);
+    border: none;
+    color: black;
+    border-radius: 20px;
+    font-size: 16px;
+  }
+  
