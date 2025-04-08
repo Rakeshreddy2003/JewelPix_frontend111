@@ -15,11 +15,10 @@ const JewelPixSearchBar = () => {
   };
 
   return (
-    <div className="jewelpix-container">
+    <>
+      <div className="search-container">
       <h1 className="jewelpix-title">JewelPix</h1>
       <p className="jewelpix-tagline">Snap & find the perfect jewelry instantly</p>
-      
-      <div className="search-container">
         <InputGroup>
           <InputGroup.Text className="search-icon" onClick={handleOpenPopup}>
             <Search size={24} color="#FFD700" />
@@ -45,7 +44,7 @@ const JewelPixSearchBar = () => {
           </div>
         </Modal.Body>
       </Modal>
-    </div>
+    </>
   );
 };
 

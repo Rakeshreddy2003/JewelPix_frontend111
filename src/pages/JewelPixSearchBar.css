@@ -95,3 +95,38 @@
     font-size: 16px;
   }
   
+
+  @media (max-width: 768px) {
+    .jewelpix-title {
+      font-size: 2rem;
+    }
+  
+    .jewelpix-tagline {
+      font-size: 1rem;
+    }
+  
+    .search-input {
+      font-size: 0.95rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .search-container {
+      padding: 1rem 0.5rem;
+    }
+  
+    .jewelpix-title {
+      font-size: 1.6rem;
+    }
+  
+    .jewelpix-tagline {
+      font-size: 0.9rem;
+    }
+  
+    .popup-button,
+    .done-button {
+      font-size: 0.9rem;
+      padding: 0.4rem 1rem;
+    }
+  }
+  
