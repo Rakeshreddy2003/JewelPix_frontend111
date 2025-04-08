@@ -45,7 +45,6 @@ const styles = {
     padding: "20px",
     borderRadius: "10px",
     textAlign: "center",
-    width: "300px",
     color: "white",
     position: "relative",
   },

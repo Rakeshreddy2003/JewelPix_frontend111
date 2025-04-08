@@ -6,15 +6,25 @@
   height: 70vh;
   object-fit: cover;
 }
+.Herosection {
+  background-image: url('../src/assets/bgimg.png');
+  background-size: cover;
+  background-position: center;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .footer-container{
   width: 100%;
   height:30vh
 }
-.jewelpix-container{
+/* .jewelpix-container{
   position: absolute;
   top: 30%;
   left: 35%;
-}
+} */
 
 .landing-page-cards{
   display: flex;
