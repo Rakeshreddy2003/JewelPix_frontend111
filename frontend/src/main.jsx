@@ -4,7 +4,7 @@ import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "./App.css"
 import App from './App.jsx'
-import CheckoutPage from './pages/Cart/Checkoutpage.jsx'
+import CheckoutPage from './pages/Cart/CheckoutPage.jsx'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import AccuracyCard from './pages/Uploads/AccuracyCard.jsx'
 import UploadImagesComponent from './pages/Uploads/UploadImagesComponent.jsx'
