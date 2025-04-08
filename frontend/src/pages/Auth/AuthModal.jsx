@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import "./AuthModal.css"; // Custom CSS
+import { useNavigate } from "react-router-dom";
+import "./AuthModal.css";
 
 const AuthModal = ({ onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    if (onClose) onClose();
+    navigate(-1);
+  };
 
   return (
     <div className="auth-modal">
       <div className="auth-container">
-        <button className="close-btn" onClick={onClose}>
+        <button className="close-btn" onClick={handleClose}>
           ✖
         </button>
         <h2>{isLogin ? "Login" : "Signup"}</h2>

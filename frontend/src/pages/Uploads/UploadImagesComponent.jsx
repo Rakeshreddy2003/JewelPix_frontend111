@@ -34,7 +34,7 @@ const UploadImagesComponent = ({ onImagesUpload }) => {
   };
 
   return (
-    <div className="upload-modal">
+    <div className="upload-modal" style={{color: "black"}}>
       <h2>Upload Images</h2>
 
       {/* Top View Upload */}
