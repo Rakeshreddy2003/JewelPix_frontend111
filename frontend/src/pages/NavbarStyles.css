@@ -1,5 +1,6 @@
 /* Navbar Styles */
 .custom-navbar {
+  background-color: #3A1929;
     padding: 10px 15px;
   }
   
@@ -71,3 +72,11 @@
     margin-top: 15px;
   }
   
+  
+.create-btn {
+  font-weight: 500;
+}
+
+.gold-border{
+  border: 1px solid gold
+}
