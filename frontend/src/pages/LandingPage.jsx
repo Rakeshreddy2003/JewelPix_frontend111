@@ -13,8 +13,6 @@ const Landingpage = () => {
         backgroundPosition: 'center',
         padding: '60px 20px'
       }}>
-        <JewelPixSearchBar />
-      </div>
 
       <LandingCards />
 
@@ -32,3 +30,5 @@ const Landingpage = () => {
 };
 
 export default Landingpage;
+
+
