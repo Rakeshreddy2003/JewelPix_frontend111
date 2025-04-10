@@ -8,22 +8,22 @@ const LandingCards = () => {
       {/* Filters */}
       <div className="filters">
         <span className="filters-dropdowns">
-          <select>
+          <select className="dropdown-select">
             <option>Category</option>
           </select>
         </span>
         <span className="filters-dropdowns">
-          <select>
+          <select className="dropdown-select">
             <option>Brand</option>
           </select>
         </span>
         <span className="filters-dropdowns">
-          <select>
+          <select className="dropdown-select">
             <option>Price</option>
           </select>
         </span>
-        <span className="filters-dropdowns">
-          <button className="reset-button">Reset</button>
+        <span className="filters-dropdowns dropdown-select">
+          <button className="reset-button">Apply Filters</button>
         </span>
       </div>
 
