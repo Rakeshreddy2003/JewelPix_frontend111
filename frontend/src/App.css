@@ -17,6 +17,7 @@
 }
 
 .footer-container{
+  background-color: #3A1929;
   width: 100%;
   height:30vh
 }
@@ -27,6 +28,7 @@
 } */
 
 .landing-page-cards{
+  background-color: #683352 !important;
   display: flex;
   height: max-content;
 }
@@ -68,9 +70,15 @@
 .filters-dropdowns{
   max-width: 14rem;
 }
+.dropdown-select{
+  background-color: #3A1929 !important;
+  border: none !important;
+  color: white !important;
+}
 .reset-button{
-  background-color: #ccc;
-  color: black;
+  background-color: #3A1929 !important;
+  color: white !important;
+  width: 100%;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.5rem;
