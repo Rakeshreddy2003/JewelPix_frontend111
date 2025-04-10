@@ -1,4 +1,5 @@
 import React from 'react';
+import bgImg from '../assets/bgimg.png';
 import JewelPixSearchBar from './JewelPixSearchBar';
 import LandingCards from './LandingCards';
 import { Pagination } from 'react-bootstrap';
@@ -6,7 +7,15 @@ import { Pagination } from 'react-bootstrap';
 const Landingpage = () => {
   return (
     <>
-      <div className='Herosection'>
+      <div
+        className='Herosection'
+        style={{
+          backgroundImage: `url(${bgImg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          padding: '60px 20px',
+        }}
+      >
         <JewelPixSearchBar />
       </div>
 
