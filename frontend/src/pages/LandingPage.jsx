@@ -7,20 +7,10 @@ import { Pagination } from 'react-bootstrap'
 const Landingpage = () => {
   return (
     <>
-      <div
-        className='Herosection'
-        style={{
-          backgroundImage: `url(${bgImg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          padding: '60px 20px',
-        }}
-      >
+      <div className='Herosection' style={{backgroundImage:`url(${bgImg})`,backgroundSize:'cover',backgroundPosition:'center',padding:'60px 20px'}}>
         <JewelPixSearchBar/>
       </div>
-
       <LandingCards/>
-
       <div className="pagination-div" style={{ backgroundColor: "#3A1929" }}>
         <Pagination className="pagination-container">
           <Pagination.Prev className='prev'/>
