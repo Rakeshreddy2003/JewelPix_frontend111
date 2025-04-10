@@ -7,7 +7,15 @@ import { Pagination } from 'react-bootstrap';
 const Landingpage = () => {
   return (
     <>
-      <div className='Herosection'>
+      <div
+        className='Herosection'
+        style={{
+          backgroundImage: `url(${bgImg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          padding: '60px 20px',
+        }}
+      >
         <JewelPixSearchBar />
       </div>
 
