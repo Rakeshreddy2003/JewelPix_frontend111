@@ -1,8 +1,8 @@
-import React from 'react';
-import bgImg from '../assets/bgimg.png';
-import JewelPixSearchBar from './JewelPixSearchBar';
-import LandingCards from './LandingCards';
-import { Pagination } from 'react-bootstrap';
+import React from 'react'
+import bgImg from '../assets/bgimg.png'
+import JewelPixSearchBar from './JewelPixSearchBar'
+import LandingCards from './LandingCards'
+import { Pagination } from 'react-bootstrap'
 
 const Landingpage = () => {
   return (
@@ -16,10 +16,10 @@ const Landingpage = () => {
           padding: '60px 20px',
         }}
       >
-        <JewelPixSearchBar />
+        <JewelPixSearchBar/>
       </div>
 
-      <LandingCards />
+      <LandingCards/>
 
       <div className="pagination-div" style={{ backgroundColor: "#3A1929" }}>
         <Pagination className="pagination-container">
@@ -27,7 +27,7 @@ const Landingpage = () => {
           <Pagination.Item className='page-item' active>{1}</Pagination.Item>
           <Pagination.Item className='page-item'>{2}</Pagination.Item>
           <Pagination.Item className='page-item'>{3}</Pagination.Item>
-          <Pagination.Next className='next' />
+          <Pagination.Next className='next'/>
         </Pagination>
       </div>
     </>
