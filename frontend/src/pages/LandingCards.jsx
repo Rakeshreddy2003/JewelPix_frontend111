@@ -1,41 +1,138 @@
-import React from "react";
-import { CardData } from "../Data/cardsData";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 import Cards from "../components/Cards";
 
-const LandingCards = () => {
+const LandingCards = ({ searchResults }) => {
+  const [filters, setFilters] = useState({ categories: [], brands: [], priceRanges: [] });
+  const [selected, setSelected] = useState({ category: "", brand: "", price: "" });
+  const [cards, setCards] = useState([]);
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/products/filters")
+      .then((res) => setFilters(res.data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  useEffect(() => {
+    const searchQuery = searchParams.get("query");
+
+    const fetchProducts = async () => {
+      if (searchResults) {
+        setCards(searchResults);
+        return;
+      }
+
+      try {
+        let res;
+        if (searchQuery) {
+          res = await axios.get(`http://localhost:8080/api/products/search?query=${searchQuery}`);
+        } else {
+          res = await axios.get("http://localhost:8080/api/products");
+        }
+        setCards(res.data);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+      }
+    };
+
+    fetchProducts();
+  }, [searchParams, searchResults]);
+
+  const clearFilters = () => {
+    setSelected({ category: "", brand: "", price: "" });
+
+    const searchQuery = searchParams.get("query");
+    const url = searchQuery
+      ? `http://localhost:8080/api/products/search?query=${searchQuery}`
+      : `http://localhost:8080/api/products`;
+
+    axios.get(url)
+      .then((res) => setCards(res.data))
+      .catch((err) => console.error(err));
+  };
+
+  const handleApplyFilters = () => {
+    const query = [];
+
+    if (selected.category) query.push(`category=${selected.category}`);
+    if (selected.brand) query.push(`brand=${selected.brand}`);
+    if (selected.price) {
+      const [min, max] = selected.price.split("-");
+      query.push(`minPrice=${min}&maxPrice=${max}`);
+    }
+
+    const searchQuery = searchParams.get("query");
+    if (searchQuery) query.push(`query=${searchQuery}`);
+
+    const fullQuery = query.length ? `?${query.join("&")}` : "";
+
+    axios
+      .get(`http://localhost:8080/api/products${fullQuery}`)
+      .then((res) => setCards(res.data))
+      .catch((err) => console.error(err));
+  };
+
   return (
     <div className="landing-page-cards background">
-      {/* Filters */}
       <div className="filters">
         <span className="filters-dropdowns">
-          <select className="dropdown-select">
-            <option>Category</option>
+          <select
+            className="dropdown-select"
+            onChange={(e) => setSelected({ ...selected, category: e.target.value })}
+            value={selected.category}
+          >
+            <option value="">Category</option>
+            {filters.categories?.map((cat, i) => (
+              <option key={i} value={cat}>{cat}</option>
+            ))}
           </select>
         </span>
+
         <span className="filters-dropdowns">
-          <select className="dropdown-select">
-            <option>Brand</option>
+          <select
+            className="dropdown-select"
+            onChange={(e) => setSelected({ ...selected, brand: e.target.value })}
+            value={selected.brand}
+          >
+            <option value="">Brand</option>
+            {filters.brands?.map((brand, i) => (
+              <option key={i} value={brand}>{brand}</option>
+            ))}
           </select>
         </span>
+
         <span className="filters-dropdowns">
-          <select className="dropdown-select">
-            <option>Price</option>
+          <select
+            className="dropdown-select"
+            onChange={(e) => setSelected({ ...selected, price: e.target.value })}
+            value={selected.price}
+          >
+            <option value="">Price</option>
+            {filters.priceRanges?.map((range, i) => (
+              <option key={i} value={range.value}>{range.label}</option>
+            ))}
           </select>
         </span>
+
         <span className="filters-dropdowns dropdown-select">
-          <button className="reset-button">Apply Filters</button>
+          <button className="reset-button" onClick={clearFilters}>Clear All</button>
+        </span>
+
+        <span className="filters-dropdowns dropdown-select">
+          <button className="reset-button" onClick={handleApplyFilters}>Apply Filters</button>
         </span>
       </div>
 
-      {/* Cards Grid */}
       <div className="cards-div d-flex flex-wrap gap-3">
-        {CardData.map((item) => (
+        {cards.map((item) => (
           <Cards
-            key={item.id}
+            key={item._id}
             image={item.image}
-            name={item.name}
+            name={item.title}
             price={item.price}
-            stockStatus={item.stockStatus}
+            stockStatus={item.stock}
           />
         ))}
       </div>
