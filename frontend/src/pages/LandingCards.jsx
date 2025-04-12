@@ -10,7 +10,7 @@ const LandingCards = ({ searchResults }) => {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/products/filters")
+    axios.get(`${import.meta.env.VITE_API_URL}/api/products/filters`)
       .then((res) => setFilters(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -27,9 +27,9 @@ const LandingCards = ({ searchResults }) => {
       try {
         let res;
         if (searchQuery) {
-          res = await axios.get(`http://localhost:8080/api/products/search?query=${searchQuery}`);
+          res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/search?query=${searchQuery}`);
         } else {
-          res = await axios.get("http://localhost:8080/api/products");
+          res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
         }
         setCards(res.data);
       } catch (err) {
@@ -45,8 +45,8 @@ const LandingCards = ({ searchResults }) => {
 
     const searchQuery = searchParams.get("query");
     const url = searchQuery
-      ? `http://localhost:8080/api/products/search?query=${searchQuery}`
-      : `http://localhost:8080/api/products`;
+      ? `${import.meta.env.VITE_API_URL}/api/products/search?query=${searchQuery}`
+      : `${import.meta.env.VITE_API_URL}/api/products`;
 
     axios.get(url)
       .then((res) => setCards(res.data))
@@ -69,7 +69,7 @@ const LandingCards = ({ searchResults }) => {
     const fullQuery = query.length ? `?${query.join("&")}` : "";
 
     axios
-      .get(`http://localhost:8080/api/products${fullQuery}`)
+      .get(`${import.meta.env.VITE_API_URL}/api/products${fullQuery}`)
       .then((res) => setCards(res.data))
       .catch((err) => console.error(err));
   };

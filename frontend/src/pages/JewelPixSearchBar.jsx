@@ -47,7 +47,7 @@ const JewelPixSearchBar = ({ onSearchResults }) => {
     try {
       setLoading(true);
       const res = await axios.post(
-        `http://localhost:8080/api/visual-search`,
+        `${import.meta.env.VITE_API_URL}/api/visual-search`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
