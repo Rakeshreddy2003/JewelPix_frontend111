@@ -13,22 +13,23 @@ const Landingpage = () => {
         backgroundPosition: 'center',
         padding: '60px 20px'
       }}>
+        <JewelPixSearchBar/>
+        </div>
 
-      <LandingCards />
+        <LandingCards />
 
-      <div className="pagination-div" style={{ backgroundColor: "#3A1929" }}>
-        <Pagination className="pagination-container">
-          <Pagination.Prev className='prev' />
-          <Pagination.Item className='page-item' active>{1}</Pagination.Item>
-          <Pagination.Item className='page-item'>{2}</Pagination.Item>
-          <Pagination.Item className='page-item'>{3}</Pagination.Item>
-          <Pagination.Next className='next' />
-        </Pagination>
-      </div>
-    </>
-  );
+        <div className="pagination-div" style={{ backgroundColor: "#3A1929" }}>
+          <Pagination className="pagination-container">
+            <Pagination.Prev className='prev' />
+            <Pagination.Item className='page-item' active>{1}</Pagination.Item>
+            <Pagination.Item className='page-item'>{2}</Pagination.Item>
+            <Pagination.Item className='page-item'>{3}</Pagination.Item>
+            <Pagination.Next className='next' />
+          </Pagination>
+        </div>
+
+      </>
+      );
 };
 
-export default Landingpage;
-
-
+      export default Landingpage;

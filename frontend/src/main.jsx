@@ -10,18 +10,24 @@ import AccuracyCard from './pages/Uploads/AccuracyCard.jsx'
 import UploadImagesComponent from './pages/Uploads/UploadImagesComponent.jsx'
 import AuthModal from './pages/Auth/AuthModal.jsx'
 import JewelryUploadComponent from './pages/Uploads/JewelryUploadComponent.jsx'
+import  Home from './pages/HomePage.jsx'
+import Navbar from './pages/Navbars.jsx'
+import Footer from './components/Footer.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
+    <Navbar/>
       <Routes>
-        <Route path="/" element={<App />} />
+    
+        <Route path="/" element={<Home />} />
         <Route path="/security" element={<AuthModal />} />
         <Route path="/accuracycard" element={<JewelryUploadComponent />} />
         <Route path="/cart" element={<CheckoutPage/>}/> 
         <Route path="/accuracy" element={<UploadImagesComponent/>}/> 
 
       </Routes>
+      <Footer/>
     </BrowserRouter>
     {/* <App /> */}
   </StrictMode>,
