@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navbar, Container, Button, Offcanvas, Image } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./NavbarStyles.css";
 import Popup from "../components/Popup";
 import { BsCart3 } from "react-icons/bs";
@@ -25,7 +25,7 @@ const Navbars = () => {
         >
           {/* Left Section: Logo + Create Button */}
           <div className="d-flex align-items-center gap-2">
-            <Navbar.Brand className="brand">Jiwel pix</Navbar.Brand>
+          <Navbar.Brand className="brand"><Link to= "/" style={{color:"white", textDecoration:"none"}}>Jewel pix</Link> </Navbar.Brand>
             <Button
               variant="outline-light"
               className="create-btn gold-border"
