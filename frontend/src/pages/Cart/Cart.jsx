@@ -1,24 +1,43 @@
-// Cart.js
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './Cart.css';
 
 const Cart = ({ image, name, price, stockStatus, quantity, onQuantityChange, onRemove }) => {
+  const cleanPrice = parseFloat((price || '0').replace(/[^0-9.]/g, ''));
+  const total = cleanPrice * quantity;
+
   return (
-    <div className="card product-card shadow-sm position-relative">
-      <button className="btn-close position-absolute top-0 end-0 m-2" onClick={onRemove} aria-label="Close"></button>
-      <img src={image} className="card-img-top product-image" alt={name} />
-      <div className="card-body">
-        <h5 className="card-title product-name">{name}</h5>
-        <div className="d-flex justify-content-between align-items-center">
-          <p className="card-text product-price">₹ {price}</p>
-          <span className={`stock-status ${stockStatus === 'In stock' ? 'text-success' : 'text-danger'}`}>{stockStatus}</span>
+    <div className="card mb-3 cart-card shadow-sm">
+      <div className="row g-0">
+        <div className="col-md-4 d-flex align-items-center justify-content-center">
+          <img src={image} alt={name} className="img-fluid rounded cart-image" />
         </div>
-        <div className="d-flex align-items-center mt-2">
-          <span className="me-2">Qty:</span>
-          <button className="btn btn-outline-secondary btn-sm" onClick={() => onQuantityChange(Math.max(1, quantity - 1))}>-</button>
-          <span className="mx-2">{quantity}</span>
-          <button className="btn btn-outline-secondary btn-sm" onClick={() => onQuantityChange(quantity + 1)}>+</button>
+        <div className="col-md-8">
+          <div className="card-body p-3">
+            <h5 className="card-title">{name}</h5>
+            <p className="card-text mb-1"><strong>Price:</strong> ₹{cleanPrice}</p>
+            <p className="card-text mb-1"><strong>Status:</strong> {stockStatus}</p>
+
+            <div className="d-flex align-items-center mb-2">
+              <label className="me-2"><strong>Quantity:</strong></label>
+              <select
+                value={quantity}
+                onChange={(e) => onQuantityChange(Number(e.target.value))}
+                className="form-select form-select-sm w-auto"
+              >
+                {[...Array(10).keys()].map((num) => (
+                  <option key={num + 1} value={num + 1}>
+                    {num + 1}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <p className="card-text mb-1"><strong>Total:</strong> ₹{total}</p>
+
+            <button className="btn btn-danger btn-sm" onClick={onRemove}>
+              Remove
+            </button>
+          </div>
         </div>
       </div>
     </div>

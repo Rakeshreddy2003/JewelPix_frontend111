@@ -2,12 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Cards from "../components/Cards";
+import ReactPaginate from "react-paginate";
+import "./pagination.css"; // Optional CSS for pagination styling
 
 const LandingCards = ({ searchResults }) => {
   const [filters, setFilters] = useState({ categories: [], brands: [], priceRanges: [] });
   const [selected, setSelected] = useState({ category: "", brand: "", price: "" });
   const [cards, setCards] = useState([]);
   const [searchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const itemsPerPage = 10;
+  const offset = currentPage * itemsPerPage;
+  const currentCards = cards.slice(offset, offset + itemsPerPage);
+  const pageCount = Math.ceil(cards.length / itemsPerPage);
 
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_API_URL}/api/products/filters`)
@@ -32,6 +40,7 @@ const LandingCards = ({ searchResults }) => {
           res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
         }
         setCards(res.data);
+        setCurrentPage(0); // reset to page 0 when data changes
       } catch (err) {
         console.error("Error fetching products:", err);
       }
@@ -49,7 +58,10 @@ const LandingCards = ({ searchResults }) => {
       : `${import.meta.env.VITE_API_URL}/api/products`;
 
     axios.get(url)
-      .then((res) => setCards(res.data))
+      .then((res) => {
+        setCards(res.data);
+        setCurrentPage(0);
+      })
       .catch((err) => console.error(err));
   };
 
@@ -70,8 +82,15 @@ const LandingCards = ({ searchResults }) => {
 
     axios
       .get(`${import.meta.env.VITE_API_URL}/api/products${fullQuery}`)
-      .then((res) => setCards(res.data))
+      .then((res) => {
+        setCards(res.data);
+        setCurrentPage(0);
+      })
       .catch((err) => console.error(err));
+  };
+
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
   };
 
   return (
@@ -125,16 +144,31 @@ const LandingCards = ({ searchResults }) => {
         </span>
       </div>
 
-      <div className="cards-div d-flex flex-wrap gap-3">
-        {cards.map((item) => (
+      <div className="cards-div d-flex flex-wrap gap-4">
+        {currentCards.map((item) => (
           <Cards
-            key={item._id}
-            image={item.image}
-            name={item.title}
-            price={item.price}
-            stockStatus={item.stock}
-          />
+          key={item._id}
+          id={item._id}
+          image={item.image}
+          name={item.title}
+          price={item.price}
+          stockStatus={item.stock}
+        />        
         ))}
+      </div>
+
+      <div className="pagination-wrapper">
+        <ReactPaginate
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          pageCount={pageCount}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          activeClassName={"active"}
+          previousClassName={"page-btn"}
+          nextClassName={"page-btn"}
+          disabledClassName={"disabled"}
+        />
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import Navbars from './pages/Navbars.jsx'
 import Landingpage from './pages/LandingPage.jsx'
 import Footer from './components/Footer.jsx'
 import JewelPixSearchBar from './pages/JewelPixSearchBar.jsx'
+import HomePage from './pages/HomePage.jsx'
 function App() {
 
   return (
@@ -15,7 +16,8 @@ function App() {
         {/* <DesignUniqueCheck/> */}
         {/* <ImagePlaceholder/> */}
         <Navbars/>
-        <Landingpage/>
+        {/* <Landingpage/> */}
+        <HomePage/>
         <Footer/>
       </div>
     </>

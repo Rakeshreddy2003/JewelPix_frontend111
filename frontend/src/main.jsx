@@ -13,22 +13,22 @@ import JewelryUploadComponent from './pages/Uploads/JewelryUploadComponent.jsx'
 import  Home from './pages/HomePage.jsx'
 import Navbar from './pages/Navbars.jsx'
 import Footer from './components/Footer.jsx'
+import { CartProvider } from './context/CartContext.jsx'; 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-    <Navbar/>
-      <Routes>
-    
-        <Route path="/" element={<Home />} />
-        <Route path="/security" element={<AuthModal />} />
-        <Route path="/accuracycard" element={<JewelryUploadComponent />} />
-        <Route path="/cart" element={<CheckoutPage/>}/> 
-        <Route path="/accuracy" element={<UploadImagesComponent/>}/> 
-
-      </Routes>
-      <Footer/>
+      <CartProvider> {/* here we are using the context to avoid the prop drilling prblm */}
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/security" element={<AuthModal />} />
+          <Route path="/accuracycard" element={<JewelryUploadComponent />} />
+          <Route path="/cart" element={<CheckoutPage />} />
+          <Route path="/accuracy" element={<UploadImagesComponent />} />
+        </Routes>
+        <Footer />
+      </CartProvider>
     </BrowserRouter>
-    {/* <App /> */}
   </StrictMode>,
-)
+);

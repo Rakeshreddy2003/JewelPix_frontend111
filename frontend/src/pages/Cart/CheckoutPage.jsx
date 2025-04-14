@@ -1,51 +1,25 @@
-// CheckoutPage.js
-import React, { useState } from 'react';
+import React, { useContext, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cart from './Cart';
 import './Cart.css';
-import img from '../../assets/JewelleryImages/img2.png';
-
-const initialProducts = [
-  {
-    id: 1,
-    image: img,
-    name: "The Finder — Björg Jewellery",
-    price: 190000,
-    stockStatus: "In stock",
-    quantity: 1,
-  },
-  {
-    id: 2,
-    image: img,
-    name: "The Finder — Björg Jewellery",
-    price: 190000,
-    stockStatus: "In stock",
-    quantity: 1,
-  },
-];
+import { CartContext } from '../../context/CartContext';
 
 const CheckoutPage = () => {
-  const [products, setProducts] = useState(initialProducts);
+  const { cartItems, removeFromCart, updateCartItemQuantity } = useContext(CartContext);
 
-  const updateQuantity = (id, newQuantity) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === id ? { ...product, quantity: newQuantity } : product
-      )
-    );
-  };
+  // useMemo ensures recalculation whenever cartItems change
+  const totalPrice = useMemo(() => {
+    return cartItems.reduce((acc, item) => {
+      const cleanPrice = parseFloat(String(item.price).replace(/[^0-9.]/g, '')) || 0;
+      const quantity = parseInt(item.quantity) || 0;
+      return acc + cleanPrice * quantity;
+    }, 0);
+  }, [cartItems]);
 
-  const removeItem = (id) => {
-    setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id));
-  };
-
-  const calculateTotal = () => {
-    const totalPrice = products.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const discount = 5649;
-    const deliveryCharges = 80;
-    const protectPromiseFee = 9;
-    return totalPrice - discount + protectPromiseFee;
-  };
+  const discount = 5649;
+  const deliveryCharges = 80;
+  const protectPromiseFee = 9;
+  const finalAmount = totalPrice > 0 ? totalPrice - discount + deliveryCharges + protectPromiseFee : 0;
 
   return (
     <div className="checkout-page">
@@ -57,39 +31,63 @@ const CheckoutPage = () => {
 
         <div className="row">
           <div className="col-md-6 mb-4">
-            {products.map((item) => (
-              <Cart
-                key={item.id}
-                image={item.image}
-                name={item.name}
-                price={item.price}
-                stockStatus={item.stockStatus}
-                quantity={item.quantity}
-                onQuantityChange={(newQuantity) => updateQuantity(item.id, newQuantity)}
-                onRemove={() => removeItem(item.id)}
-              />
-            ))}
+            {cartItems.length > 0 ? (
+              cartItems.map((item) => (
+                <Cart
+                  key={item._id}
+                  image={item.image}
+                  name={item.name}
+                  price={item.price}
+                  stockStatus={item.stockStatus}
+                  quantity={item.quantity}
+                  onQuantityChange={(newQty) => updateCartItemQuantity(item._id, newQty)}
+                  onRemove={() => removeFromCart(item._id)}
+                />
+              ))
+            ) : (
+              <p className="text-muted">Your cart is empty.</p>
+            )}
           </div>
 
           <div className="col-md-6 mb-4">
             <div className="price-details-card p-4 shadow-sm">
               <h5 className="section-heading">Price details</h5>
+
               <div className="d-flex justify-content-between mb-2">
-                <span>Price ({products.length} items)</span>
-                <span>₹ {calculateTotal()}</span>
+                <span>Price ({cartItems.length} items)</span>
+                <span>₹ {totalPrice}</span>
               </div>
+
+              <div className="d-flex justify-content-between mb-2">
+                <span>Discount</span>
+                <span>- ₹ {discount}</span>
+              </div>
+
+              <div className="d-flex justify-content-between mb-2">
+                <span>Delivery Charges</span>
+                <span>₹ {deliveryCharges}</span>
+              </div>
+
+              <div className="d-flex justify-content-between mb-2">
+                <span>Protect Promise Fee</span>
+                <span>₹ {protectPromiseFee}</span>
+              </div>
+
               <hr />
+
               <div className="d-flex justify-content-between fw-bold">
                 <span>TOTAL</span>
-                <span>₹ {calculateTotal()}</span>
+                <span>₹ {finalAmount}</span>
               </div>
             </div>
-            <div className="text-end">
-          <button className="btn place-order-btn">PLACE ORDER</button>
-        </div>
+
+            {cartItems.length > 0 && (
+              <div className="text-end mt-3">
+                <button className="btn place-order-btn">PLACE ORDER</button>
+              </div>
+            )}
           </div>
         </div>
-        
       </div>
     </div>
   );

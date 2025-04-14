@@ -64,6 +64,8 @@
   .input-group-text {
     display: flex;
     align-items: center;
+    margin-top: 9px;
+    height: 3.15rem;
   }
 
   .popup-content {

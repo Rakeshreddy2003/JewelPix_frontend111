@@ -4,6 +4,11 @@ import { useNavigate, Link } from "react-router-dom";
 import "./NavbarStyles.css";
 import Popup from "../components/Popup";
 import { BsCart3 } from "react-icons/bs";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+import Badge from "react-bootstrap/Badge";
+
+
 
 const expand = false;
 
@@ -15,7 +20,11 @@ const Navbars = () => {
   const navigateToSecurity = () => {
     navigate("/security");
   };
-
+  const { cartItems } = useContext(CartContext);
+  const totalItems = cartItems.reduce(
+    (acc, item) => acc + Number(item.quantity || 0),
+    0
+  );
   return (
     <>
       <Navbar key={expand} expand={expand} className="custom-navbar">
@@ -25,7 +34,11 @@ const Navbars = () => {
         >
           {/* Left Section: Logo + Create Button */}
           <div className="d-flex align-items-center gap-2">
-          <Navbar.Brand className="brand"><Link to= "/" style={{color:"white", textDecoration:"none"}}>Jewel pix</Link> </Navbar.Brand>
+            <Navbar.Brand className="brand">
+              <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+                Jewel pix
+              </Link>{" "}
+            </Navbar.Brand>
             <Button
               variant="outline-light"
               className="create-btn gold-border"
@@ -38,8 +51,9 @@ const Navbars = () => {
           {/* Right Section: Auth Buttons + Toggle */}
           {/* Right Section: Cart, Auth Buttons, Toggle */}
           <div className="d-flex align-items-center gap-2">
-            {isLoggedIn && (
+            <div style={{ position: "relative" }}>
               <BsCart3
+                onClick={() => navigate("/cart")}
                 style={{
                   color: "white",
                   width: "2rem",
@@ -47,9 +61,24 @@ const Navbars = () => {
                   cursor: "pointer",
                 }}
               />
-            )}
+              {totalItems > 0 && (
+                <Badge
+                  pill
+                  bg="danger"
+                  style={{
+                    position: "absolute",
+                    top: "-5px",
+                    right: "-5px",
+                    fontSize: "0.6rem",
+                    padding: "0.3em 0.45em",
+                  }}
+                >
+                  {totalItems}
+                </Badge>
+              )}
+            </div>
 
-            {!isLoggedIn && (
+            {
               <div className="auth-buttons d-flex gap-2">
                 <Button
                   variant="outline-light"
@@ -66,7 +95,7 @@ const Navbars = () => {
                   Sign Up
                 </Button>
               </div>
-            )}
+            }
 
             <Navbar.Toggle
               className="custom-toggle"
