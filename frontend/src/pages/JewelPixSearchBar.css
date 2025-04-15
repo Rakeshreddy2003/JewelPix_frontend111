@@ -54,7 +54,11 @@
     border-bottom-right-radius: 25px;
     padding-right: 15px;
   }
-  
+  .camera-icon:hover {
+    background-color: #d8c7c7; /* Darker shade on hover */
+    transform: scale(1.1); /* Slightly increase the size on hover */
+    cursor: pointer; /* Change cursor to pointer to indicate clickability */
+  }
   .input-group {
     border-radius: 25px;
     overflow: hidden;

@@ -89,7 +89,10 @@
   cursor: pointer;
   font-size: 1rem;
 }
-
+.reset-button:hover {
+  background-color: #5d2b3d !important; /* Change background on hover */
+  color: #fff !important; /* Keep the text color white */
+}
 .cards-div{
   padding: 4rem;
 
@@ -129,7 +132,8 @@
 }
 
 .add-to-cart-btn {
-  background-image: url("../src/assets//button.png") !important; /* Background image for the button */
+  /* background-image: url("../src/assets//button.png") !important; Background image for the button */
+  background: linear-gradient(45deg, gold, rgb(163, 74, 74));
   width: 80% !important;
   justify-self: center !important;/* Grayish-blue button color like in the image */
   color: #ffffff !important; /* White text */
@@ -148,7 +152,7 @@
 }
 
 .add-to-cart-btn:hover {
-  background-color: #5a6268; /* Slightly darker on hover */
+  background: linear-gradient(45deg, #f0c27b, #4b1248); /* New gradient on hover */
 }
 .pagination-container{
   display: flex;
