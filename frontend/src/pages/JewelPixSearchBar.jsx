@@ -47,7 +47,7 @@ const JewelPixSearchBar = ({ onSearchResults }) => {
     try {
       setLoading(true);
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/visual-search`,
+        `https://tired-kimmie-gajala-sonic-solutions-2de32759.koyeb.app/api/visual-search`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
