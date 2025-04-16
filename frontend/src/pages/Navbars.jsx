@@ -1,30 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Navbar, Container, Button, Offcanvas, Image } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import "./NavbarStyles.css";
 import Popup from "../components/Popup";
+import AuthModal from "../pages/Auth/AuthModal";
 import { BsCart3 } from "react-icons/bs";
-import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import Badge from "react-bootstrap/Badge";
-
-
 
 const expand = false;
 
 const Navbars = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Replace with actual auth check
   const [showPopup, setShowPopup] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState("login"); // 'login' or 'signup'
   const navigate = useNavigate();
 
-  const navigateToSecurity = () => {
-    navigate("/security");
-  };
   const { cartItems } = useContext(CartContext);
   const totalItems = cartItems.reduce(
     (acc, item) => acc + Number(item.quantity || 0),
     0
   );
+
+  const handleAuthClick = (mode) => {
+    setAuthMode(mode);
+    setShowAuthModal(true);
+  };
+
   return (
     <>
       <Navbar key={expand} expand={expand} className="custom-navbar">
@@ -37,7 +39,7 @@ const Navbars = () => {
             <Navbar.Brand className="brand">
               <Link to="/" style={{ color: "white", textDecoration: "none" }}>
                 Jewel pix
-              </Link>{" "}
+              </Link>
             </Navbar.Brand>
             <Button
               variant="outline-light"
@@ -48,7 +50,6 @@ const Navbars = () => {
             </Button>
           </div>
 
-          {/* Right Section: Auth Buttons + Toggle */}
           {/* Right Section: Cart, Auth Buttons, Toggle */}
           <div className="d-flex align-items-center gap-2">
             <div style={{ position: "relative" }}>
@@ -78,24 +79,22 @@ const Navbars = () => {
               )}
             </div>
 
-            {
-              <div className="auth-buttons d-flex gap-2">
-                <Button
-                  variant="outline-light"
-                  onClick={navigateToSecurity}
-                  className="gold-border"
-                >
-                  Login
-                </Button>
-                <Button
-                  variant="outline-light"
-                  onClick={navigateToSecurity}
-                  className="gold-border"
-                >
-                  Sign Up
-                </Button>
-              </div>
-            }
+            <div className="auth-buttons d-flex gap-2">
+              <Button
+                variant="outline-light"
+                className="gold-border"
+                onClick={() => handleAuthClick("login")}
+              >
+                Login
+              </Button>
+              <Button
+                variant="outline-light"
+                className="gold-border"
+                onClick={() => handleAuthClick("signup")}
+              >
+                Sign Up
+              </Button>
+            </div>
 
             <Navbar.Toggle
               className="custom-toggle"
@@ -135,12 +134,18 @@ const Navbars = () => {
             <Button className="logout-btn">Logout</Button>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
-
-        {/* Popup */}
-        {showPopup && <Popup onClose={() => setShowPopup(false)} />}
       </Navbar>
 
+      {/* Popup for Create */}
       {showPopup && <Popup onClose={() => setShowPopup(false)} />}
+
+      {/* Auth Modal */}
+      {showAuthModal && (
+        <AuthModal
+          onClose={() => setShowAuthModal(false)}
+          defaultMode={authMode}
+        />
+      )}
     </>
   );
 };
