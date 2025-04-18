@@ -1,138 +1,166 @@
-
 .jewelpix-container {
-    background-color: black;
-    padding: 20px 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
+  background-color: black;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search {
+  width: 100%;
+
+}
+
+.jewelpix-title {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0;
+  text-align: center;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+}
+
+.jewelpix-tagline {
+  color: #fff;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  -webkit-text-stroke-width: 0.4px;
+  -webkit-text-stroke-color: #3A1929;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.search-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.search-icon {
+  background-color: black;
+  border: none;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  /* padding-left: 15px; */
+  height: 40px;
+  width: 10%;
+  cursor: pointer;
+}
+
+.search-icon:hover {
+  background-color: #3A1929;
+  /* transform: scale(1.1); Slightly increase the size on hover */
+  cursor: pointer;
+}
+
+.search-input {
+  border: none;
+  background-color: #f0e9e9;
+  width: 80%;
+
+  height: 50px;
+
+}
+
+.search-input::placeholder {
+  color: #999;
+  font-style: italic;
+
+}
+
+.camera-icon {
+  background-color: black;
+  color: "#FFD700";
+  border: none;
+  width: 10%;
+  border-top-right-radius: 15px;
+
+  border-bottom-right-radius: 15px;
+  padding-right: 15px;
+}
+
+.camera-icon:hover {
+  background-color: #3A1929;
+  /* transform: scale(1.1); Slightly increase the size on hover */
+  cursor: pointer;
+}
+
+.input-group {
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  height: 3.15rem;
+}
+
+.popup-content {
+  text-align: center;
+  padding: 20px;
+  background-color: #542c41;
+  border-radius: 10px;
+}
+
+.popup-button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background-color: #3b1e2c;
+  border: 2px solid gold;
+  color: white;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+.done-button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 15px;
+  background: linear-gradient(to right, gold, brown);
+  border: none;
+  color: black;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+
+@media (max-width: 768px) {
   .jewelpix-title {
-    color: white;
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 0;
-    text-align: center;
+    font-size: 2rem;
+   
   }
-  
+
   .jewelpix-tagline {
-    color: white;
-    font-style: italic;
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
+    font-size: 1rem;
   }
-  
-  .search-container {
-    width: 100%;
-    max-width: 500px;
-  }
-  
-  .search-icon {
-    background-color: black;
-    border: none;
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
-    padding-left: 15px;
-  }
-  
+
   .search-input {
-    border: none;
-    background-color: #f0e9e9;
-    height: 50px;
+    font-size: 0.95rem;
   }
-  
-  .search-input::placeholder {
-    color: #999;
-    font-style: italic;
-  }
-  
-  .camera-icon {
-    background-color: #f0e9e9;
-    border: none;
-    border-top-right-radius: 25px;
-    border-bottom-right-radius: 25px;
-    padding-right: 15px;
-  }
-  .camera-icon:hover {
-    background-color: #d8c7c7; /* Darker shade on hover */
-    transform: scale(1.1); /* Slightly increase the size on hover */
-    cursor: pointer; /* Change cursor to pointer to indicate clickability */
-  }
-  .input-group {
-    border-radius: 25px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .input-group-text {
-    display: flex;
-    align-items: center;
-    margin-top: 9px;
-    height: 3.15rem;
+}
+
+@media (max-width: 480px) {
+  .search-container {
+    padding: 1rem 0.5rem;
   }
 
-  .popup-content {
-    text-align: center;
-    padding: 20px;
-    background-color: #542c41;
-    border-radius: 10px;
+  .jewelpix-title {
+    font-size: 1.6rem;
   }
-  
-  .popup-button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    background-color: #3b1e2c;
-    border: 2px solid gold;
-    color: white;
-    border-radius: 20px;
-    font-size: 16px;
+
+  .jewelpix-tagline {
+    font-size: 0.9rem;
   }
-  
+
+  .popup-button,
   .done-button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 15px;
-    background: linear-gradient(to right, gold, brown);
-    border: none;
-    color: black;
-    border-radius: 20px;
-    font-size: 16px;
+    font-size: 0.9rem;
+    padding: 0.4rem 1rem;
   }
-  
-
-  @media (max-width: 768px) {
-    .jewelpix-title {
-      font-size: 2rem;
-    }
-  
-    .jewelpix-tagline {
-      font-size: 1rem;
-    }
-  
-    .search-input {
-      font-size: 0.95rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .search-container {
-      padding: 1rem 0.5rem;
-    }
-  
-    .jewelpix-title {
-      font-size: 1.6rem;
-    }
-  
-    .jewelpix-tagline {
-      font-size: 0.9rem;
-    }
-  
-    .popup-button,
-    .done-button {
-      font-size: 0.9rem;
-      padding: 0.4rem 1rem;
-    }
-  }
-  
+}

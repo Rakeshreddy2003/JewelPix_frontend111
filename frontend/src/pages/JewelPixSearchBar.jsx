@@ -71,7 +71,7 @@ const JewelPixSearchBar = ({ onSearchResults }) => {
       <div className="search-container">
         <h1 className="jewelpix-title">JewelPix</h1>
         <p className="jewelpix-tagline">Snap & find the perfect jewelry instantly</p>
-        <InputGroup>
+        <InputGroup className="search">
           <InputGroup.Text className="search-icon" onClick={handleTextSearch}>
             <Search size={24} color="#FFD700" />
           </InputGroup.Text>
@@ -83,7 +83,7 @@ const JewelPixSearchBar = ({ onSearchResults }) => {
             onKeyPress={handleKeyPress}
           />
           <InputGroup.Text className="camera-icon" onClick={handleOpenPopup}>
-            <Camera size={24} color="#333" />
+            <Camera size={24} color="#FFD700" />
           </InputGroup.Text>
         </InputGroup>
       </div>
