@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AuthModal.css";
 
-const AuthModal = ({ onClose }) => {
-  const [isLogin, setIsLogin] = useState(true);
+const AuthModal = ({ onClose, defaultMode = "login" }) => {
+  const [isLogin, setIsLogin] = useState(defaultMode === "login");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsLogin(defaultMode === "login");
+  }, [defaultMode]);
 
   const handleClose = () => {
     if (onClose) onClose();
-    navigate(-1);
   };
 
   return (

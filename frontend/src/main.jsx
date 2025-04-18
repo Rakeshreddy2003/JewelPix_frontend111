@@ -23,7 +23,7 @@ createRoot(document.getElementById('root')).render(
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/security" element={<AuthModal />} />
+          {/* <Route path="/security" element={<AuthModal />} /> */}
           <Route path="/accuracycard" element={<JewelryUploadComponent />} />
           <Route path="/cart" element={<CheckoutPage />} />
           <Route path="/accuracy" element={<UploadImagesComponent />} />
