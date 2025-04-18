@@ -7,7 +7,9 @@ import { BsCart3 } from "react-icons/bs";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import Badge from "react-bootstrap/Badge";
-
+import Logo from '../assets/logo.png'
+import menu from '../assets/menu.svg'
+import text from '../assets/text.svg'
 
 
 const expand = false;
@@ -36,7 +38,7 @@ const Navbars = () => {
           <div className="d-flex align-items-center gap-2">
             <Navbar.Brand className="brand">
               <Link to="/" style={{ color: "white", textDecoration: "none" }}>
-                Jewel pix
+               <img src={Logo} alt="logo" height={50}/>
               </Link>{" "}
             </Navbar.Brand>
             <Button
@@ -51,7 +53,27 @@ const Navbars = () => {
           {/* Right Section: Auth Buttons + Toggle */}
           {/* Right Section: Cart, Auth Buttons, Toggle */}
           <div className="d-flex align-items-center gap-2">
-            <div style={{ position: "relative" }}>
+
+            {
+              <div className="auth-buttons d-flex gap-2">
+                <Button
+                  variant="outline-light"
+                  onClick={navigateToSecurity}
+                  className="gold-border"
+                >
+                  Login
+                </Button>
+                <Button
+                  variant="outline-light"
+                  onClick={navigateToSecurity}
+                  className="gold-border"
+                >
+                  Sign Up
+                </Button>
+              </div>
+            }
+
+<div style={{ position: "relative" }}>
               <BsCart3
                 onClick={() => navigate("/cart")}
                 style={{
@@ -78,30 +100,12 @@ const Navbars = () => {
               )}
             </div>
 
-            {
-              <div className="auth-buttons d-flex gap-2">
-                <Button
-                  variant="outline-light"
-                  onClick={navigateToSecurity}
-                  className="gold-border"
-                >
-                  Login
-                </Button>
-                <Button
-                  variant="outline-light"
-                  onClick={navigateToSecurity}
-                  className="gold-border"
-                >
-                  Sign Up
-                </Button>
-              </div>
-            }
-
             <Navbar.Toggle
               className="custom-toggle"
               aria-controls="offcanvasNavbar"
             />
           </div>
+          
         </Container>
 
         {/* Offcanvas Menu */}

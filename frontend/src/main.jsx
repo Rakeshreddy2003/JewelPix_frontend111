@@ -14,6 +14,7 @@ import  Home from './pages/HomePage.jsx'
 import Navbar from './pages/Navbars.jsx'
 import Footer from './components/Footer.jsx'
 import { CartProvider } from './context/CartContext.jsx'; 
+import ProductPage from './pages/ProductPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/accuracycard" element={<JewelryUploadComponent />} />
           <Route path="/cart" element={<CheckoutPage />} />
           <Route path="/accuracy" element={<UploadImagesComponent />} />
+          <Route path="/product/:id" element={<ProductPage />} />
         </Routes>
         <Footer />
       </CartProvider>
