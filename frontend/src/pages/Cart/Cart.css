@@ -1,6 +1,8 @@
 /* CheckoutPage.css */
 .checkout-page {
-    background-color: #f8f9fa; /* Light background for the page */
+    background-color:  #542c41;; /* Light background for the page */
+    color: white; /* Dark text for contrast */
+
   }
   
   .section-heading {
@@ -20,6 +22,7 @@
   .price-details-card {
     background-color: #fff;
     border: 1px solid #dee2e6;
+    color: #000;
     border-radius: 5px;
   }
   

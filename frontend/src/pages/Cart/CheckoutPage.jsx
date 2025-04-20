@@ -22,8 +22,8 @@ const CheckoutPage = () => {
   const finalAmount = totalPrice > 0 ? totalPrice - discount + deliveryCharges + protectPromiseFee : 0;
 
   return (
-    <div className="checkout-page">
-      <div className="container my-5">
+    <div className="checkout-page p-3">
+      <div className="container">
         <div className="mb-4">
           <h5 className="section-heading">Enter delivery Address</h5>
           <input type="text" className="form-control delivery-input" placeholder="Enter delivery address" />
@@ -45,7 +45,7 @@ const CheckoutPage = () => {
                 />
               ))
             ) : (
-              <p className="text-muted">Your cart is empty.</p>
+              <p className="text-mute" style={{color:"white"}}>Your cart is empty.</p>
             )}
           </div>
 

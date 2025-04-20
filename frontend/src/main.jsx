@@ -1,4 +1,5 @@
 import { StrictMode } from 'react'
+import React, { createContext, useState } from "react";
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -14,23 +15,31 @@ import  Home from './pages/HomePage.jsx'
 import Navbar from './pages/Navbars.jsx'
 import Footer from './components/Footer.jsx'
 import { CartProvider } from './context/CartContext.jsx'; 
+import { WishlistProvider } from "./context/WishlistContext.jsx";
 import ProductPage from './pages/ProductPage.jsx'
+import WishlistPage from './pages/WishlistPage.jsx'
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <CartProvider> {/* here we are using the context to avoid the prop drilling prblm */}
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/security" element={<AuthModal />} /> */}
-          <Route path="/accuracycard" element={<JewelryUploadComponent />} />
-          <Route path="/cart" element={<CheckoutPage />} />
-          <Route path="/accuracy" element={<UploadImagesComponent />} />
-          <Route path="/product/:id" element={<ProductPage />} />
-        </Routes>
-        <Footer />
-      </CartProvider>
+      <WishlistProvider>
+        <CartProvider>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/accuracycard" element={<JewelryUploadComponent />} />
+            <Route path="/cart" element={<CheckoutPage />} />
+            <Route path="/accuracy" element={<UploadImagesComponent />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/wishlist" element={<WishlistPage />} />
+          
+       
+          </Routes>
+          <Footer />
+        </CartProvider>
+      </WishlistProvider>
     </BrowserRouter>
   </StrictMode>,
 );
+

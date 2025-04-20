@@ -21,17 +21,20 @@
   /* Offcanvas Styles */
   .custom-offcanvas {
     width: 300px;
+    background-color: #542c41;
+    color: white;
   }
   
   .profile-section {
     text-align: center;
     padding: 20px 0;
+    
   }
   
   .profile-img {
     width: 80px;
     height: 80px;
-    border: 2px solid #507691;
+    border: 2px solid #3A1929;
   }
   
   .username {
@@ -44,6 +47,7 @@
     background: #f9f9f9;
     border-radius: 10px;
     margin: 15px 0;
+    color: black;
   }
   
   .order-history h5 {
@@ -70,6 +74,9 @@
     border-radius: 20px;
     font-weight: bold;
     margin-top: 15px;
+    background-image: url("../assets/button.png");
+    background-position: center;
+    background-size: cover;
   }
   
   
