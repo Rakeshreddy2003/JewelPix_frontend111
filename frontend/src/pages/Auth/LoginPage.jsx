@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import "./AuthModal.css";
 
-const AuthModal = ({ onClose, defaultMode = "login" }) => {
-  const [isLogin, setIsLogin] = useState(defaultMode === "login");
+const LoginPage = ({ onClose }) => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    setIsLogin(defaultMode === "login");
-  }, [defaultMode]);
+  const [message, setMessage] = useState("");
+  const timeoutRef = useRef(null);
 
   const handleClose = () => {
-    // Check if onClose is provided and then close the modal
-    if (onClose) onClose();
+    if (typeof onClose === "function") onClose();
+  };
+
+  const showMessage = (msg, duration = 3000) => {
+    setMessage(msg);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => setMessage(""), duration);
   };
 
   const handleAuth = async () => {
-    if (!email.trim()) return alert("Please enter email");
+    if (!email.trim()) return showMessage("Please enter email");
     setLoading(true);
 
     try {
@@ -29,66 +29,62 @@ const AuthModal = ({ onClose, defaultMode = "login" }) => {
         const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/verifyLoginOtp`, { email });
         if (res.data.success) {
           setOtpSent(true);
-          alert("OTP sent to email");
+          setOtp("");
+          showMessage("OTP sent successfully!");
         } else {
-          alert("Email not found or OTP failed to send");
+          showMessage("Email not found or OTP failed to send");
         }
       } else {
-        if (!otp.trim()) return alert("Enter OTP");
+        if (!otp.trim()) return showMessage("Enter OTP");
         const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/login`, { email, otp });
         if (res.data.success) {
-          alert("Login successful");
+          showMessage("Login successful");
           localStorage.setItem("token", res.data.token);
-          navigate("/");
-          handleClose(); // Close the modal after successful login
+          setTimeout(() => handleClose(), 1000);
         } else {
-          alert("Invalid OTP");
+          showMessage("Invalid OTP");
         }
       }
     } catch (err) {
       console.error(err);
-      alert("Something went wrong");
+      showMessage(err.response?.data?.message || "Something went wrong");
     }
 
     setLoading(false);
   };
 
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current); // cleanup on unmount
+  }, []);
+
   return (
     <div className="auth-modal">
       <div className="auth-container">
         <button className="close-btn" onClick={handleClose}>✖</button>
-        <h2>{isLogin ? "Login" : "Signup"}</h2>
-
-        {!isLogin && <input type="text" placeholder="Enter Name" disabled />}
+        <h2>Login</h2>
+        {message && (
+          <p style={{ color: message.includes("success") ? "green" : "red" }}>{message}</p>
+        )}
         <input
           type="email"
           placeholder="Enter email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          disabled={loading || otpSent}
         />
-
-        {/* OTP Input Field */}
         <input
           type="text"
           placeholder="Enter OTP"
           value={otp}
           onChange={(e) => setOtp(e.target.value)}
-          disabled={!otpSent}  // OTP input is disabled until OTP is sent
+          disabled={!otpSent}
         />
-
         <button className="auth-btn" onClick={handleAuth} disabled={loading}>
           {loading ? "Please wait..." : otpSent ? "Login" : "Send OTP"}
         </button>
-
-        <p className="toggle-text">
-          {isLogin ? "Don't have an account?" : "Already have an account?"}
-          <span onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? " Signup" : " Login"}
-          </span>
-        </p>
       </div>
     </div>
   );
 };
 
-export default AuthModal;
+export default LoginPage;

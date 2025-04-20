@@ -6,7 +6,7 @@ const Cart = ({ image, name, price, stockStatus, quantity, onQuantityChange, onR
   const total = cleanPrice * quantity;
 
   return (
-    <div className="card mb-3 cart-card shadow-sm">
+    <div className="card mb-3 cart-card shadow-sm ">
       <div className="row g-0">
         <div className="col-md-4 d-flex align-items-center justify-content-center">
           <img src={image} alt={name} className="img-fluid rounded cart-image" />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { WishlistContext } from '../context/WishlistContext.jsx';
 import { CartContext } from '../context/CartContext';
 import Cards from '../components/Cards';
 import './productPage.css'
@@ -8,8 +9,10 @@ import './productPage.css'
 const ProductPage = () => {
     const { id } = useParams();
     const { addToCart } = useContext(CartContext);
+    const { addToWishlist } = useContext(WishlistContext);
     const [product, setProduct] = useState(null);
     const [similarProducts, setSimilarProducts] = useState([]);
+    
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/api/products/${id}`)
@@ -27,6 +30,17 @@ const ProductPage = () => {
         const item = { _id: product._id, image: product.image, name: product.title, price: product.price, stockStatus: product.stock, rating: product.rating };
         addToCart(item);
     };
+
+    const handleAddToWishlist = () => {
+        const item = {
+          _id: product._id,
+          name: product.title,
+          image: product.image,
+          price: product.price
+        };
+        addToWishlist(item);
+      };
+      
 
     return (
         <div style={{ backgroundColor: '#542c41', color: 'white', padding: '2rem', minHeight: '100vh' }}>
@@ -53,12 +67,13 @@ const ProductPage = () => {
 
                         <span
                             style={{
-                                color: product.stock === "Instock" ? '#1FB73B' : 'red',
+                                color: product.stock?.trim().toLowerCase() === "in stock" ? '#1FB73B' : 'red',
                                 fontWeight: 600
                             }}
                         >
                             {product.stock}
                         </span>
+
 
                     </div>
 
@@ -68,7 +83,7 @@ const ProductPage = () => {
 
                     <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem' }}>
                         <button className="add-to-cart-btn h-40 w-60" onClick={handleAddToCart}>Add to cart</button>
-                        <button className="add-to-cart-btn h-40 w-60" >Add to wish list</button>
+                        <button className="add-to-cart-btn h-40 w-60" onClick={handleAddToWishlist} >Add to wish list</button>
 
                     </div>
                 </div>
