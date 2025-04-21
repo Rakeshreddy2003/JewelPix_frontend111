@@ -11,6 +11,15 @@ const LandingCards = ({ searchResults }) => {
   const [cards, setCards] = useState([]);
   const [searchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(0);
+  const [pageRange, setPageRange] = useState(window.innerWidth < 768 ? 1 : 3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setPageRange(window.innerWidth < 768 ? 1 : 3);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const itemsPerPage = 10;
   const offset = currentPage * itemsPerPage;
@@ -140,36 +149,66 @@ const LandingCards = ({ searchResults }) => {
         </span>
 
         <span className="filters-dropdowns dropdown-select">
-          <button className="reset-button" onClick={handleApplyFilters}>Apply Filters</button>
+          <button className="apply-now" onClick={handleApplyFilters}>Apply Filters</button>
         </span>
       </div>
 
-      <div className="cards-div d-flex flex-wrap gap-4">
-        {currentCards.map((item) => (
-          <Cards
-          key={item._id}
-          id={item._id}
-          image={item.image}
-          name={item.title}
-          price={item.price}
-          stockStatus={item.stock}
-        />        
-        ))}
+      <div className="cards-wrapper">
+        {/* Mobile: horizontal scroll rows */}
+        <div className="d-md-none d-flex flex-column gap-4 mt-3">
+          {[0, 1, 2].map((rowIndex) => (
+            <div
+              key={rowIndex}
+              className="cards-row d-flex flex-nowrap overflow-auto gap-3 px-2"
+              style={{ scrollSnapType: 'x mandatory' }}
+            >
+              {currentCards
+                .filter((_, idx) => idx % 3 === rowIndex)
+                .map((item) => (
+                  <Cards
+                    key={item._id}
+                    id={item._id}
+                    image={item.image}
+                    name={item.title}
+                    price={item.price}
+                    stockStatus={item.stock}
+                  />
+                ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop: regular grid */}
+        <div className="d-none d-md-flex  cards-div flex-wrap gap-4">
+          {currentCards.map((item) => (
+            <Cards
+              key={item._id}
+              id={item._id}
+              image={item.image}
+              name={item.title}
+              price={item.price}
+              stockStatus={item.stock}
+            />
+          ))}
+        </div>
       </div>
 
-      <div className="pagination-wrapper">
-        <ReactPaginate
-          previousLabel={"Previous"}
-          nextLabel={"Next"}
-          pageCount={pageCount}
-          onPageChange={handlePageClick}
-          containerClassName={"pagination"}
-          activeClassName={"active"}
-          previousClassName={"page-btn"}
-          nextClassName={"page-btn"}
-          disabledClassName={"disabled"}
-        />
-      </div>
+
+      <ReactPaginate
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        pageCount={pageCount}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination"}
+        activeClassName={"active"}
+        previousClassName={"page-btn"}
+        nextClassName={"page-btn"}
+        disabledClassName={"disabled"}
+        breakLabel={"..."}
+        marginPagesDisplayed={1}
+        pageRangeDisplayed={pageRange}
+      />
+
     </div>
   );
 };

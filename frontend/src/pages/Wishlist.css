@@ -1,0 +1,27 @@
+/* For mobile view */
+@media (max-width: 768px) {
+    .wishlist-page {
+      padding: 1rem;
+      background-color: #542c41;
+      height: auto;
+    }
+  
+    .wishlist-page .wishlist-container {
+      display: flex;
+      overflow-x: auto; /* Horizontal scroll */
+      gap: 1rem;
+      flex-wrap: nowrap; /* Prevent wrapping */
+    }
+  
+    .wishlist-page .wishlist-container > div {
+      flex: 0 0 48%; /* Two items per row */
+      max-width: 70%; /* Ensure no overflow */
+      position: relative;
+    }
+  
+    .wishlist-page h2 {
+      color: white;
+      margin-bottom: 1rem;
+    }
+  }
+  
