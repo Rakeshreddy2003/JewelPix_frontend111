@@ -83,7 +83,7 @@ const JewelPixSearchBar = ({ onSearchResults }) => {
             onKeyPress={handleKeyPress}
           />
           <InputGroup.Text className="camera-icon" onClick={handleOpenPopup}>
-            <Camera size={24} color="#FFD700" />
+            <Camera size={24} color="#FFD700" className="camera" />
           </InputGroup.Text>
         </InputGroup>
       </div>

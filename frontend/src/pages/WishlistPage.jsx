@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
 import { WishlistContext } from "../context/WishlistContext.jsx";
 import Cards from "../components/Cards";
+import "./Wishlist.css"; // Assuming you have a CSS file for styling
 
 const WishlistPage = () => {
   const { wishlist, removeFromWishlist } = useContext(WishlistContext);
 
   return (
-    <div className="wishlist-page" style={{ padding: "2rem", backgroundColor:" #542c41", height: "80vh" }}>
+    <div className="wishlist-page" style={{ padding: "2rem", backgroundColor: "#542c41", height: "60vh" }}>
       <h2 style={{ color: "white", marginBottom: "2rem" }}>Your Wishlist</h2>
 
       {wishlist.length === 0 ? (
         <p style={{ color: "white" }}>Your wishlist is empty.</p>
       ) : (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "2rem" }}>
+        <div className="wishlist-container">
           {wishlist.map((item) => (
             <div key={item._id} style={{ position: "relative" }}>
               <Cards
@@ -41,6 +42,7 @@ const WishlistPage = () => {
             </div>
           ))}
         </div>
+
       )}
     </div>
   );

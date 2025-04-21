@@ -133,7 +133,7 @@
 @media (max-width: 768px) {
   .jewelpix-title {
     font-size: 2rem;
-   
+
   }
 
   .jewelpix-tagline {
@@ -163,4 +163,12 @@
     font-size: 0.9rem;
     padding: 0.4rem 1rem;
   }
+
+  .search-icon svg,
+  .camera-icon svg {
+    min-width: 20px;
+
+  }
+  
+
 }

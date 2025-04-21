@@ -24,7 +24,8 @@ const Cards = ({ image, name, price, stockStatus, id }) => {
       style={{
         backgroundColor: "#3A1929",
         border: "1px solid #8D4F61",
-        minWidth: "250px",
+        width: "250px", // fixed width for horizontal scroll
+        flex: "0 0 auto", // prevents shrink/stretch
         cursor: "pointer"
       }}
     >

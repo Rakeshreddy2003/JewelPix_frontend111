@@ -18,6 +18,7 @@ import { CartProvider } from './context/CartContext.jsx';
 import { WishlistProvider } from "./context/WishlistContext.jsx";
 import ProductPage from './pages/ProductPage.jsx'
 import WishlistPage from './pages/WishlistPage.jsx'
+import UserProfilePage from './pages/UserProfilePage.jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -33,7 +34,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="/accuracy" element={<UploadImagesComponent />} />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/wishlist" element={<WishlistPage />} />
-          
+            <Route path="/profile" element={<UserProfilePage />} />
        
           </Routes>
           <Footer />

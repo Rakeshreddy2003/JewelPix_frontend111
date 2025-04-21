@@ -1,0 +1,30 @@
+.user-profile-sidebar {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.sidebar {
+  border-right: 1px solid #ddd;
+  min-height: 100vh;
+}
+
+.profile-img {
+  width: 80px;
+  height: 80px;
+}
+
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.sidebar-links li {
+  padding: 10px 0;
+  cursor: pointer;
+  color: #333;
+}
+
+.sidebar-links .logout-link {
+  color: red;
+}
