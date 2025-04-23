@@ -8,16 +8,16 @@ const HomePage = () => {
 
   return (
     <>
-     <div className='Herosection' style={{
+      <div className='Herosection' style={{
         backgroundImage: `url(${bgImg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '60px 20px'
       }}>
         <JewelPixSearchBar onSearchResults={setSearchResults} />
-        </div>
+      </div>
 
-    
+      {/* Pass searchResults to LandingCards */}
       <LandingCards searchResults={searchResults} />
     </>
   );

@@ -1,13 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { WishlistContext } from "../context/WishlistContext.jsx";
 import Cards from "../components/Cards";
-import "./Wishlist.css"; // Assuming you have a CSS file for styling
+import "./Wishlist.css";
 
 const WishlistPage = () => {
+  const navigate = useNavigate();
   const { wishlist, removeFromWishlist } = useContext(WishlistContext);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login"); 
+    }
+  }, [navigate]);
+
   return (
-    <div className="wishlist-page" style={{ padding: "2rem", backgroundColor: "#542c41" }}>
+
+    <div className="wishlist-page" style={{ padding: "2rem", backgroundColor: "#542c41", minHeight: "60vh" }}>
+
+
       <h2 style={{ color: "white", marginBottom: "2rem" }}>Your Wishlist</h2>
       {console.log(wishlist)}
 
@@ -43,7 +55,6 @@ const WishlistPage = () => {
             </div>
           ))}
         </div>
-
       )}
     </div>
   );
