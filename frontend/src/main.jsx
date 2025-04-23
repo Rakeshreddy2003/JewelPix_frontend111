@@ -19,11 +19,13 @@ import { WishlistProvider } from "./context/WishlistContext.jsx";
 import ProductPage from './pages/ProductPage.jsx'
 import WishlistPage from './pages/WishlistPage.jsx'
 import UserProfilePage from './pages/UserProfilePage.jsx';
+// import { ProductsProvider } from './context/ProductsContext.jsx';
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
+    {/* <ProductsProvider> */}
       <WishlistProvider>
         <CartProvider>
           <Navbar />
@@ -40,6 +42,7 @@ createRoot(document.getElementById('root')).render(
           <Footer />
         </CartProvider>
       </WishlistProvider>
+      {/* </ProductsProvider> */}
     </BrowserRouter>
   </StrictMode>,
 );
