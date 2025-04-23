@@ -7,13 +7,14 @@ const WishlistPage = () => {
   const { wishlist, removeFromWishlist } = useContext(WishlistContext);
 
   return (
-    <div className="wishlist-page" style={{ padding: "2rem", backgroundColor: "#542c41", height: "60vh" }}>
+    <div className="wishlist-page" style={{ padding: "2rem", backgroundColor: "#542c41" }}>
       <h2 style={{ color: "white", marginBottom: "2rem" }}>Your Wishlist</h2>
+      {console.log(wishlist)}
 
       {wishlist.length === 0 ? (
         <p style={{ color: "white" }}>Your wishlist is empty.</p>
       ) : (
-        <div className="wishlist-container">
+        <div className="wishlist-container" style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
           {wishlist.map((item) => (
             <div key={item._id} style={{ position: "relative" }}>
               <Cards

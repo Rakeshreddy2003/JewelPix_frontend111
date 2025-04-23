@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import "./AuthModal.css";
 
-const LoginPage = ({ onClose }) => {
+const LoginPage = ({ onClose , setIsLogin }) => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
@@ -39,6 +39,7 @@ const LoginPage = ({ onClose }) => {
         const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/login`, { email, otp });
         if (res.data.success) {
           showMessage("Login successful");
+          setIsLogin(true);
           localStorage.setItem("token", res.data.token);
           setTimeout(() => handleClose(), 1000);
         } else {

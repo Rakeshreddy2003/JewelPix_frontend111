@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import UploadImagesComponent from "../pages/Uploads/UploadImagesComponent";
+
 const Popup = ({ onClose }) => {
   const [showUpload, setShowUpload] = useState(false);
+
+  const handlePatentClick = () => {
+    setShowUpload(true);
+  };
+
+  const handleGuidelinesClick = () => {
+    // You can replace the link below with your actual PDF URL
+    window.open("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "_blank");
+  };
+
   return (
     <div style={styles.overlay}>
       <div style={styles.popup}>
@@ -9,9 +20,13 @@ const Popup = ({ onClose }) => {
         {!showUpload ? (
           <>
             <h3 style={styles.title}>Protect Your Design Today</h3>
-            <button style={styles.button}>Get a Patent</button>
+            <button style={styles.button} onClick={handlePatentClick}>
+              Get a Patent
+            </button>
             <p style={styles.orText}>or</p>
-            <button style={styles.button}>Copyright Your Design</button>
+            <button style={styles.button} onClick={handleGuidelinesClick}>
+              View Copyright Guidelines
+            </button>
             <button 
               style={styles.guidelinesButton} 
               onClick={() => setShowUpload(true)}
@@ -34,7 +49,7 @@ const styles = {
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
