@@ -26,7 +26,8 @@ const Cards = ({ image, name, price, stockStatus, id }) => {
         border: "1px solid #8D4F61",
         width: "250px", // fixed width for horizontal scroll
         flex: "0 0 auto", // prevents shrink/stretch
-        cursor: "pointer"
+        cursor: "pointer",
+        minHeight: "350px",
       }}
     >
       <div style={{ padding: "1rem", objectFit: "cover" }}>

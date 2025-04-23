@@ -148,7 +148,7 @@ const LandingCards = ({ searchResults }) => {
           <button className="reset-button" onClick={clearFilters}>Clear All</button>
         </span>
 
-        <span className="filters-dropdowns dropdown-select">
+        <span className="filters-dropdowns dropdown-select" id="apply-filters">
           <button className="apply-now" onClick={handleApplyFilters}>Apply Filters</button>
         </span>
       </div>

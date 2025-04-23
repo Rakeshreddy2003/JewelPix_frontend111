@@ -55,7 +55,7 @@ const JewelryUploadComponent = () => {
                 <>
                     <h3 style={{ color: "red" }}>❌ Your design is not unique.</h3>
                     <p>Try modifying it or checking for alternatives.</p>
-                    <h3>Similar Matches</h3>
+                    {/* <h3>Similar Matches</h3>
                     <div style={{ display: "flex", justifyContent: "center", gap: "15px" }}>
                         {similarMatches.map((match, index) => (
                             <Cards 
@@ -66,7 +66,7 @@ const JewelryUploadComponent = () => {
                                 stockStatus={match.stockStatus} 
                             />
                         ))}
-                    </div>
+                    </div> */}
                 </>
             )}
         </div>
