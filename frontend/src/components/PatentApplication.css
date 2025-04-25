@@ -1,0 +1,127 @@
+.patent-form {
+  background-color: #5b3046;
+  padding: 20px;
+  color: #000;
+}
+
+.form-header {
+  display: flex;
+  align-items: center;
+  background-color: #3A1929;
+  font-size: 1.5rem;
+  width: 100%;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  color: #fff;
+}
+.form-header h2{
+  width: 75%;
+  margin: 0;
+  padding: 10px;      
+  margin-left: 20px;
+}
+
+.back-btn {
+  background-color: #5b3046;
+  border: 1px solid goldenrod;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  width: 10%;
+  font-size: 12px;
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  padding: 0;
+  margin: 10px;
+  margin-right: 20px;
+}
+
+.patent-form-container {
+  max-width: 600px;
+  color: #000;
+  margin: 2rem auto;
+
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid goldenrod;
+}
+
+
+.patent-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+}
+
+.patent-form-container label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+
+}
+
+.patent-form-container input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  border: 2px solid goldenrod
+}
+
+.patent-form-container textarea {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  border: 2px solid goldenrod;
+  background : #3e2435;;
+}
+
+.form-fields {
+
+  padding: 1rem;
+
+}
+
+
+.checkbox-wrapper {
+  max-width: 25%;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+@media screen and (max-width: 768px) {
+  .checkbox-wrapper {
+    max-width: 40%;
+
+  }
+  .back-btn{
+    width: 15%;
+  
+  }
+  h2{
+    font-size: 1rem;
+    margin-left: 0;
+  }
+  
+}
+
+.checkbox-input {
+background-color: rebeccapurple;
+width: 14px;
+
+} 
+
+
+
+.checkbox-wrapper label {
+  margin: 0;
+  font-size: 1rem;
+  
+}

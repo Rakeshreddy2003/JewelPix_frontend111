@@ -9,38 +9,42 @@ const Popup = ({ onClose }) => {
   };
 
   const handleGuidelinesClick = () => {
-    // You can replace the link below with your actual PDF URL
     window.open("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "_blank");
+  };
+
+  // 👇 only closes the Upload popup, not the whole thing
+  const handleCloseUpload = () => {
+    setShowUpload(false);
   };
 
   return (
     <div style={styles.overlay}>
       <div style={styles.popup}>
-        <button style={styles.closeButton} onClick={onClose}>X</button>
+        {/* Close full popup only here */}
+        {!showUpload && (
+          <button style={styles.closeButton} onClick={onClose}>×</button>
+        )}
+
         {!showUpload ? (
           <>
             <h3 style={styles.title}>Protect Your Design Today</h3>
             <button style={styles.button} onClick={handlePatentClick}>
               Get a Patent
             </button>
-            <p style={styles.orText}>or</p>
-            <button style={styles.button} onClick={handleGuidelinesClick}>
-              View Copyright Guidelines
-            </button>
-            <button 
-              style={styles.guidelinesButton} 
-              onClick={() => setShowUpload(true)}
-            >
-              Upload Design
+            <button style={styles.guidelinesButton} onClick={handleGuidelinesClick}>
+              View Guidelines
             </button>
           </>
         ) : (
-          <UploadImagesComponent />
+          // 👇 Pass the close just for Upload
+          <UploadImagesComponent onClose={handleCloseUpload} onSuccess={onClose} />
+
         )}
       </div>
     </div>
   );
 };
+
 
 const styles = {
   overlay: {
@@ -55,6 +59,7 @@ const styles = {
     alignItems: "center",
     zIndex: 1000,
   },
+  
   popup: {
     backgroundColor: "#4c2d41",
     padding: "20px",
@@ -62,6 +67,9 @@ const styles = {
     textAlign: "center",
     color: "white",
     position: "relative",
+    height: "40%",
+    width: "350px",
+    border:"1px solid goldenrod",
   },
   closeButton: {
     position: "absolute",
@@ -76,30 +84,39 @@ const styles = {
   title: {
     fontSize: "18px",
     marginBottom: "15px",
+    marginTop: "20px"
   },
   button: {
     backgroundColor: "#2c1b24",
-    border: "1px solid goldenrod",
     color: "white",
-    padding: "10px",
-    width: "100%",
-    borderRadius: "20px",
     marginBottom: "10px",
     cursor: "pointer",
+  
+    width: "80%",
+    padding: "10px",
+    margin: "10px 0",
+    border:"1px solid #b28966",
+    borderRadius:"5px",
+   
+  
   },
   orText: {
     fontSize: "14px",
     marginBottom: "10px",
   },
   guidelinesButton: {
-    background: "linear-gradient(to right, #d4af37, #8b5e3b)",
-    color: "white",
+    width: "80%",
     padding: "10px",
-    width: "100%",
-    borderRadius: "20px",
-    cursor: "pointer",
+    background: "linear-gradient(90deg, #d4af37, #8c5a24)",
+    color: "white",
     border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontSize:" 16px",
+    fontWeight: "bold",
+    marginTop: "20px",
   },
+    
 };
 
 export default Popup;
