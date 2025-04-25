@@ -1,0 +1,48 @@
+/* AddressPopup.css or ThankYouPage.css */
+.thank-you-page {
+    text-align: center;
+    padding: 50px;
+    height: 55vh;
+    background-color: #542c41;
+    text-align: center;
+}
+
+.edit-btn {
+    padding: 10px;
+    background: linear-gradient(90deg, #d4af37, #8c5a24);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 20px;
+
+
+}
+
+.thank-you-page h2 {
+    font-size: 36px;
+    color: #4CAF50;
+    /* Green color for success */
+}
+
+.return-home-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.thank-you-page p {
+    color: white;
+}
+
+
+.return-home-btn:hover {
+    background-color: #45a049;
+}

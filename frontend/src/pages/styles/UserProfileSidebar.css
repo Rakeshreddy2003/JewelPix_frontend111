@@ -28,3 +28,30 @@
 .sidebar-links .logout-link {
   color: red;
 }
+
+
+/* Custom styling for the order history section */
+.order-history {
+  max-height: 300px; /* Limit the height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-top: 10px;
+}
+
+.order-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-list {
+  max-height: 250px; /* Set a maximum height for the orders list */
+  overflow-y: auto; /* Make the list scrollable */
+}
+
+.username {
+  font-weight: bold;
+  margin-top: 10px;
+}

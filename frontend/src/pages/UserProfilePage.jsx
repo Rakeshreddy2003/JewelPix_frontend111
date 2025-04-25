@@ -1,4 +1,3 @@
-// components/UserProfileSidebar.jsx
 import React, { useEffect, useState } from "react";
 import { Offcanvas, Image } from "react-bootstrap";
 import "../components/styles/NavbarStyles.css"; // Adjust the path as necessary
@@ -14,21 +13,37 @@ const UserProfileSidebar = ({ show, onClose, onLogout }) => {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/profile`, {
+        const resProfile = await fetch(`${import.meta.env.VITE_API_URL}/api/user/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        const data = await res.json();
-        if (res.ok) {
-          setUserData(data.user);
-          setOrders(data.orders);
+        const dataProfile = await resProfile.json();
+        if (resProfile.ok) {
+          setUserData(dataProfile.user);
         } else {
-          console.error(data.message);
+          console.error("Error fetching user profile:", dataProfile.message);
         }
+
+        // Fetch user orders
+        const resOrders = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const dataOrders = await resOrders.json();
+        console.log("Fetched orders:", dataOrders); // Log the orders data
+
+        if (dataOrders && dataOrders.length > 0) {
+          setOrders(dataOrders); // Set the fetched orders to the state
+        } else {
+          console.error("No orders found or invalid response");
+        }
+
       } catch (err) {
-        console.error("Error fetching profile:", err);
+        console.error("Error fetching profile or orders:", err);
       }
     };
 
@@ -52,15 +67,20 @@ const UserProfileSidebar = ({ show, onClose, onLogout }) => {
 
         <div className="order-history">
           <h5>Order History</h5>
-          <ul>
+          <div className="orders-list" style={{ maxHeight: '300px', overflowY: 'auto' }}>
             {orders && orders.length > 0 ? (
               orders.map((order, index) => (
-                <li key={index}>{order}</li>
+                <div key={index} className="order-item">
+                  <p><strong>Order ID:</strong> {order.orderId}</p>
+                  <p><strong>Items:</strong> {order.items.join(", ")}</p> {/* Join items with a comma */}
+                  <p><strong>Date:</strong> {new Date(order.date).toLocaleString()}</p>
+                  <hr />
+                </div>
               ))
             ) : (
-              <li>No recent orders</li>
+              <p>No recent orders</p>
             )}
-          </ul>
+          </div>
         </div>
 
         <button className="logout-btn" onClick={onLogout}>Logout</button>

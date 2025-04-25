@@ -1,9 +1,22 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+
+  // Initialize cart from localStorage if it exists
+  useEffect(() => {
+    const savedCartItems = JSON.parse(localStorage.getItem("cartItems"));
+    if (savedCartItems) {
+      setCartItems(savedCartItems);
+    }
+  }, []);
+
+  // Sync cartItems with localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const addToCart = (item) => {
     const existingItem = cartItems.find((i) => i._id === item._id);
@@ -30,6 +43,12 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  // Function to clear the cart after an order is placed
+  const clearCart = () => {
+    setCartItems([]); // Clear the state
+    localStorage.removeItem("cartItems"); // Remove cart from localStorage
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -37,6 +56,7 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         updateCartItemQuantity,
+        setCartItems
       }}
     >
       {children}
