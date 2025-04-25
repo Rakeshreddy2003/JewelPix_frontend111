@@ -1,4 +1,4 @@
-import React, { useState, useContext , useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Popup from "../components/Popup.jsx"
 import {
   Navbar,
@@ -51,33 +51,33 @@ const Navbars = () => {
     setShowPopup(true); // Show the popup
   }
 
-    useEffect(() => {
-      const fetchProfile = async () => {
-        const token = localStorage.getItem("token"); // Get the token from local storage
-  
-        if (!token) {
-          console.log("No token found");
-          return;
-        }
-  
-        try {
-          const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/user/profile`, {
-            headers: {
-              Authorization: `Bearer ${token}`, // Set Bearer token in header
-            },
-          });
-          setUser(response.data); 
-  
-          console.log("User Profile Data:", response.data); // Log the response data
-        } catch (error) {
-          console.error("Error fetching profile:", error.response?.data || error.message);
-        }
-      };
-  
-      fetchProfile();
-    }, [islogin]);
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const token = localStorage.getItem("token"); // Get the token from local storage
 
-    
+      if (!token) {
+        console.log("No token found");
+        return;
+      }
+
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/user/profile`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Set Bearer token in header
+          },
+        });
+        setUser(response.data);
+
+
+      } catch (error) {
+        console.error("Error fetching profile:", error.response?.data || error.message);
+      }
+    };
+
+    fetchProfile();
+  }, [islogin]);
+
+
 
 
   return (
@@ -107,12 +107,12 @@ const Navbars = () => {
           {/* Right Side: Desktop View Only */}
           <div className="d-none d-lg-flex align-items-center gap-3">
 
-          {!islogin && (
-  <>
-    <Button variant="outline-dark" className="outline" onClick={() => { setShowLogin(true); setShowMobileMenu(false); }}>Login</Button>
-    <Button variant="outline-dark" className="outline" onClick={() => { setShowSignup(true); setShowMobileMenu(false); }}>Sign Up</Button>
-  </>
-)}
+            {!islogin && (
+              <>
+                <Button variant="outline-dark" className="outline" onClick={() => { setShowLogin(true); setShowMobileMenu(false); }}>Login</Button>
+                <Button variant="outline-dark" className="outline" onClick={() => { setShowSignup(true); setShowMobileMenu(false); }}>Sign Up</Button>
+              </>
+            )}
 
             <div style={{ position: "relative" }}>
               <BsCart3 onClick={() => navigate("/cart")} style={{ color: "white", width: "2rem", height: "2rem", cursor: "pointer" }} />
@@ -133,7 +133,7 @@ const Navbars = () => {
             </div>
 
             <Button variant="outline-light" className="gold-border" onClick={() => setShowProfileSidebar(true)}>
-            Profile
+              Profile
             </Button>
           </div>
 
@@ -148,23 +148,26 @@ const Navbars = () => {
 
       {/* Mobile Menu Offcanvas */}
       <Offcanvas className="outer-line" show={showMobileMenu} onHide={() => setShowMobileMenu(false)} placement="start">
-        <Offcanvas.Header  closeButton>
+        <Offcanvas.Header closeButton>
           <Offcanvas.Title>Menu</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Nav className="flex-column text-center gap-3">
-          <Button variant="outline-dark" className="outline" onClick={() => { navigate("/"); setShowMobileMenu(false); }}>Home</Button>
-          {!islogin && (
-  <>
-    <Button variant="outline-light" onClick={() => setShowLogin(true)} className="gold-border">Login</Button>
-    <Button variant="outline-light" onClick={() => setShowSignup(true)} className="gold-border">Sign Up</Button>
-  </>
-)}
+            <Button variant="outline-dark" className="outline" onClick={() => { navigate("/"); setShowMobileMenu(false); }}>Home</Button>
+            <Button variant="outline-light" className="outline" onClick={() => { handleCreateClick(); setShowMobileMenu(false); }}>
+              + Create
+            </Button>
+            {!islogin && (
+              <>
+                <Button variant="outline-light" onClick={() => { setShowLogin(true); setShowMobileMenu(false); }} className="gold-border">Login</Button>
+                <Button variant="outline-light" onClick={() => { setShowSignup(true); setShowMobileMenu(false); }} className="gold-border">Sign Up</Button>
+              </>
+            )}
 
-            <Button variant="outline-dark"  className="outline" onClick={() => { navigate("/cart"); setShowMobileMenu(false); }}>
+            <Button variant="outline-dark" className="outline" onClick={() => { navigate("/cart"); setShowMobileMenu(false); }}>
               Cart {totalItems > 0 && <Badge bg="danger" className="ms-2">{totalItems}</Badge>}
             </Button>
-            <Button variant="outline-dark"  className="outline" onClick={() => { navigate("/wishlist"); setShowMobileMenu(false); }}>
+            <Button variant="outline-dark" className="outline" onClick={() => { navigate("/wishlist"); setShowMobileMenu(false); }}>
               Wishlist {totalWishlistItems > 0 && <Badge bg="danger" className="ms-2">{totalWishlistItems}</Badge>}
             </Button>
           </Nav>
@@ -178,7 +181,7 @@ const Navbars = () => {
       {showLogin && (
         <div className="auth-modal">
           <div className="auth-container">
-            <LoginPage onClose={() => setShowLogin(false)} setIsLogin={setIsLogin}/>
+            <LoginPage onClose={() => setShowLogin(false)} setIsLogin={setIsLogin} />
           </div>
         </div>
       )}

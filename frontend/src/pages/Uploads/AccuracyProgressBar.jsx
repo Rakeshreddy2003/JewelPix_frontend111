@@ -1,8 +1,9 @@
 import React from "react";
+import "./Uploads.css"; // Assuming you have a CSS file for styles
 
 const AccuracyProgressBar = ({ accuracy }) => {
   return (
-    <div className="progress-container">
+    <div className="container">
       <p className="accuracy-text">Accuracy: {accuracy}%</p>
       <div className="progress-bar">
         <div
