@@ -4,7 +4,7 @@ import axios from 'axios';
 import { WishlistContext } from '../context/WishlistContext.jsx';
 import { CartContext } from '../context/CartContext';
 import Cards from '../components/Cards';
-import './styles/productpage.css';
+import './styles/productPage.css';
 
 const ProductPage = () => {
     const { id } = useParams();
