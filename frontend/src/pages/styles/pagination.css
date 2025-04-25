@@ -16,7 +16,7 @@
 }
 
 .pagination li:hover {
-  background-color: rgba(255, 215, 0, 0.2); /* light golden on hover */
+  background-color: rgba(255, 215, 0, 0.2); 
 }
 
 .pagination .active {
@@ -55,15 +55,16 @@
 
 .filters .apply-now {
   grid-column: span 3; /* This spans across all three columns */
-  background-color: #3A1929 !important;
+  background-color: #3A1929 ;
   color: white ;
   width: 100%;
   padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.5rem;
+
+  border-radius: 10px;
   cursor: pointer;
-  
+  border: 1px solid gold;
 }
+
 
 
 @media (max-width: 768px) {
@@ -98,6 +99,7 @@
 
   .filters-dropdowns {
     margin-bottom: 10px;
+   
   }
 }
 

@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Cards from "../components/Cards";
 import ReactPaginate from "react-paginate";
-import "./pagination.css"; // Optional CSS for pagination styling
+import "./styles/pagination.css"; // Optional CSS for pagination styling
 
 const LandingCards = ({ searchResults }) => {
   const [filters, setFilters] = useState({ categories: [], brands: [], priceRanges: [] });
@@ -144,8 +144,8 @@ const LandingCards = ({ searchResults }) => {
           </select>
         </span>
 
-        <span className="filters-dropdowns dropdown-select">
-          <button className="reset-button" onClick={clearFilters}>Clear All</button>
+        <span className="filters-dropdowns">
+          <button className="apply-now" onClick={clearFilters}>Clear All</button>
         </span>
 
         <span className="filters-dropdowns dropdown-select" id="apply-filters">

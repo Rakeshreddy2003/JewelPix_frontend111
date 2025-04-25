@@ -73,7 +73,7 @@
 }
 .dropdown-select{
   background-color: #3A1929 !important;
-  border: transparent !important;
+
   color: white !important;
   border-radius: 10px !important;
   white-space: nowrap;        /* Prevent text wrapping */

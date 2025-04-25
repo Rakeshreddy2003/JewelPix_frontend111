@@ -1,12 +1,8 @@
-import { useState } from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import ImagePlaceholder from './components/ImagePlaceholder'
-import Navbars from './pages/Navbars.jsx'
-import Landingpage from './pages/LandingPage.jsx'
+import Navbars from './components/Navbars.jsx'
 import Footer from './components/Footer.jsx'
-import JewelPixSearchBar from './pages/JewelPixSearchBar.jsx'
 import HomePage from './pages/HomePage.jsx'
 function App() {
 

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import Popup from "../components/Popup.jsx"
+import Popup from "./ProtectionPopup.jsx"
 import {
   Navbar,
   Container,
@@ -10,16 +10,16 @@ import {
   Nav,
 } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
-import "./NavbarStyles.css";
+import "./styles/NavbarStyles.css"; 
 import { BsCart3 } from "react-icons/bs";
-import { CartContext } from "../context/CartContext";
-import { WishlistContext } from "../context/WishlistContext";
+import { CartContext } from "../context/CartContext.jsx";
+import { WishlistContext } from "../context/WishlistContext.jsx";
 import Logo from "../assets/logo.png";
 import wishlisticon from "../assets/e-commerce.svg";
-import menuicon from "../assets/menus (2).svg";
-import LoginPage from "./Auth/LoginPage";
-import SignupPage from "./Auth/SignupPage";
-import UserProfileSidebar from "./UserProfilePage";
+import menuicon from "../assets/menu.svg";
+import LoginPage from "../pages/Auth/LoginPage.jsx";
+import SignupPage from "../pages/Auth/SignupPage.jsx";
+import UserProfileSidebar from "../pages/UserProfilePage.jsx";
 import axios from "axios";
 
 const Navbars = () => {

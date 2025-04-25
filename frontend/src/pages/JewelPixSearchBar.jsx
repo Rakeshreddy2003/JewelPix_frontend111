@@ -3,7 +3,7 @@ import { Form, InputGroup, Modal, Button } from "react-bootstrap";
 import { Search, Camera } from "lucide-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./JewelPixSearchBar.css";
+import "./styles/JewelPixSearchBar.css";
 
 const JewelPixSearchBar = ({ onSearchResults }) => {
   const [showPopup, setShowPopup] = useState(false);
