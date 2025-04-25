@@ -2,7 +2,7 @@ import React from 'react';
 import './Cart.css';
 
 const Cart = ({ image, name, price, stockStatus, quantity, onQuantityChange, onRemove }) => {
-  const cleanPrice = parseFloat((price || '0').replace(/[^0-9.]/g, ''));
+  const cleanPrice = price || 0;
   const total = cleanPrice * quantity;
 
   return (

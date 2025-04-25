@@ -2,7 +2,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import { FaInstagram, FaWhatsapp, FaYoutube } from 'react-icons/fa'; // Import icons from react-icons
-import './Footer.css'; // Import custom CSS
+import './styles/Footer.css'; // Import custom CSS
 
 const Footer = () => {
   return (

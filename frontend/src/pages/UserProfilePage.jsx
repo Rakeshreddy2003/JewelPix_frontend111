@@ -1,7 +1,7 @@
 // components/UserProfileSidebar.jsx
 import React, { useEffect, useState } from "react";
 import { Offcanvas, Image } from "react-bootstrap";
-import "./NavbarStyles.css";
+import "../components/styles/NavbarStyles.css"; // Adjust the path as necessary
 import defaulUserImage from "../assets/boy.svg"; // Default user image
 
 const UserProfileSidebar = ({ show, onClose, onLogout }) => {

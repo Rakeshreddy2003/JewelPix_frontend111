@@ -2,8 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { WishlistContext } from "../context/WishlistContext.jsx";
 import Cards from "../components/Cards";
-import "./Wishlist.css";
-
+import "./styles/wishlist.css";
 const WishlistPage = () => {
   const navigate = useNavigate();
   const { wishlist, removeFromWishlist } = useContext(WishlistContext);

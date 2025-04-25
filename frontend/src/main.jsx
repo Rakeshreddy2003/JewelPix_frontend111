@@ -11,7 +11,7 @@ import AccuracyCard from './pages/Uploads/AccuracyCard.jsx'
 import UploadImagesComponent from './pages/Uploads/UploadImagesComponent.jsx'
 import AuthModal from './pages/Auth/AuthModal.jsx'
 import Home from './pages/HomePage.jsx'
-import Navbar from './pages/Navbars.jsx'
+import Navbar from './components/Navbars.jsx'
 import Footer from './components/Footer.jsx'
 import { CartProvider } from './context/CartContext.jsx';
 import { WishlistProvider } from "./context/WishlistContext.jsx";

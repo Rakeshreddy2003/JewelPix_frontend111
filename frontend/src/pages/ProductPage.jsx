@@ -4,7 +4,7 @@ import axios from 'axios';
 import { WishlistContext } from '../context/WishlistContext.jsx';
 import { CartContext } from '../context/CartContext';
 import Cards from '../components/Cards';
-import './productPage.css'
+import './styles/productpage.css';
 
 const ProductPage = () => {
     const { id } = useParams();
@@ -107,15 +107,6 @@ const ProductPage = () => {
     );
 };
 
-const goldBtn = {
-    background: 'linear-gradient(to right, #FFD700, #DAA520)',
-    color: '#3A1929',
-    padding: '0.6rem 1.2rem',
-    border: 'none',
-    borderRadius: '8px',
-    fontWeight: 600,
-    cursor: 'pointer',
-};
 
 
 
