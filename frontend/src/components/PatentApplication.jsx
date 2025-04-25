@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./patentApplication.css";
+import "./PatentApplication.css";
 
 const PatentApplicationForm = () => {
   const location = useLocation();
