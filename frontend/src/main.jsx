@@ -19,6 +19,8 @@ import ProductPage from './pages/ProductPage.jsx'
 import WishlistPage from './pages/WishlistPage.jsx'
 import UserProfilePage from './pages/UserProfilePage.jsx';
 import PatentApplicationForm from "./components/PatentApplication.jsx";
+import ThankYouPage from './pages/ThankYouPage.jsx';
+
 
 
 
@@ -41,6 +43,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/profile" element={<UserProfilePage />} />
             <Route path="/apply-patent" element={<PatentApplicationForm />} />
+            <Route path="/thank-you" element={<ThankYouPage />} />
           </Routes>
           <Footer />
         </CartProvider>

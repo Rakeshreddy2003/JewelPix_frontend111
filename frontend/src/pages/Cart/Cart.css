@@ -1,10 +1,15 @@
 /* CheckoutPage.css */
 .checkout-page {
-    background-color:  #542c41;; /* Light background for the page */
-    color: white; /* Dark text for contrast */
+    background-color:#542c41;
+    color: white; 
 
   }
-  
+  .address-card{
+    color: #000 !important;
+    background-color: #3A1929;
+    border: 1px solid gold !important;
+  }
+
   .section-heading {
     font-size: 1.2rem;
     font-weight: bold;
