@@ -137,7 +137,7 @@ const LandingCards = ({ searchResults }) => {
               <p>No similar products found. Please try adjusting your filters or search query.</p>
             </div>
           ) : (
-            <div className="d-none d-md-flex  cards-div flex-wrap gap-4">
+            <div className="d-none d-md-flex  flex-wrap gap-4">
               {currentCards.map((item) => (
                 <Cards
                   key={item._id}

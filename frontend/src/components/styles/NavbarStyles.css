@@ -1,104 +1,110 @@
 /* Navbar Styles */
 .custom-navbar {
   background-color: #3A1929;
-    padding: 10px 15px;
-  }
-  
-  .brand {
-    color: white;
-    font-weight: bold;
-  }
-  
- 
-  .auth-buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .custom-toggle {
-    background-color: white;
-  }
-  
-  /* Offcanvas Styles */
-  .custom-offcanvas {
-    width: 300px;
-    background-color: #542c41;
-    color: white;
-  }
-  
-  .profile-section {
-    text-align: center;
-    padding: 20px 0;
-    
-  }
-  
-  .profile-img {
-    width: 80px;
-    height: 80px;
-    border: 2px solid #3A1929;
-  }
-  
-  .username {
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  
-  .order-history {
-    padding: 15px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    margin: 15px 0;
-    color: black;
-  }
-  
-  .order-history h5 {
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  .order-history ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .order-history li {
-    padding: 8px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .logout-btn {
-    display: block;
-    width: 100%;
-    background: linear-gradient(45deg, gold, brown);
-    border: none;
-    padding: 10px;
-    border-radius: 20px;
-    font-weight: bold;
-    margin-top: 200px;
-    background-image: url("../assets/button.png");
-    background-position: center;
-    background-size: cover;
-  }
-  
-  
+  padding: 10px 15px;
+}
+
+.brand {
+  color: white;
+  font-weight: bold;
+}
+
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.custom-toggle {
+  background-color: white;
+}
+
+/* Offcanvas Styles */
+.custom-offcanvas {
+  width: 300px;
+  background-color: #542c41;
+  color: white;
+}
+
+.profile-section {
+  text-align: center;
+  margin: 20px 0;
+
+}
+
+.profile-img {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #3A1929;
+}
+
+.username {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.order-history {
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  margin: 15px 0;
+  color: black;
+}
+
+.order-history h5 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.order-history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.order-history li {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.sidebar-body-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.logout-btn {
+  width: 100%;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  font-weight: bold;
+  background-image: url("../../assets/button.png");
+  background-position: center;
+  background-size: cover;
+  margin-top: 10px;
+}
+
+
+
 .create-btn {
   font-weight: 500;
 }
 
-.gold-border{
+.gold-border {
   border: 1px solid gold
- 
 }
 
-.outline{
+.outline {
   border: 1px solid #d4af37;
   color: white;
 }
-.outer-line{
+
+.outer-line {
   background-color: #3A1929;
   color: white;
 }
 
-closeButton{
+closeButton {
   color: white;
 }

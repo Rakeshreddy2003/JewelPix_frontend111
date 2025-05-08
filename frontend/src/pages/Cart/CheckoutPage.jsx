@@ -14,7 +14,7 @@ const CheckoutPage = () => {
 
   const [address, setAddress] = useState(null);
   const [showAddressPopup, setShowAddressPopup] = useState(false);
-  const [loading, setLoading] = useState(false); // Loading state
+
   // Calculate the total price
   const totalPrice = useMemo(() => {
     return cartItems.reduce((acc, item) => {
@@ -30,7 +30,7 @@ const CheckoutPage = () => {
   const finalAmount = totalPrice > 0 ? totalPrice - discount + deliveryCharges + protectPromiseFee : 0;
 
   const handlePlaceOrder = async () => {
-    setLoading(true);
+   
     if (!address) {
       alert("Please add a delivery address.");
       return;
@@ -76,9 +76,7 @@ const CheckoutPage = () => {
     } catch (err) {
       console.error("Error placing order:", err);
       alert("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false); // Stop loading after order is placed or failed
-    }
+    } 
   };
 
 
@@ -206,11 +204,7 @@ const CheckoutPage = () => {
             </div>
 
 
-            {loading ? (
-              <div className="text-center mt-3">
-                <ClipLoader size={50} color="#00BFFF" loading={loading} />
-              </div>
-            ) : (
+            {
               cartItems.length > 0 && (
                 <div className="text-end mt-3">
                   <button className="btn place-order-btn" onClick={handlePlaceOrder}>
@@ -218,7 +212,7 @@ const CheckoutPage = () => {
                   </button>
                 </div>
               )
-            )}
+            }
 
           </div>
         </div>

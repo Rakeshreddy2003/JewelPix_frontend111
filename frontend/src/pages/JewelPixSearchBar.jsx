@@ -14,6 +14,12 @@ const JewelPixSearchBar = () => {
   const { setProducts } = useContext(ProductContext);
   const navigate = useNavigate();
 
+  const handleOpenPopup = () => setShowPopup(true);
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    setImage(null);
+  };
+
   const handleTextSearch = async () => {
     if (!searchQuery.trim()) return;
     try {
@@ -26,6 +32,14 @@ const JewelPixSearchBar = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") handleTextSearch();
+  };
+
+  const handleFileChange = (e) => {
+    setImage(e.target.files[0]);
   };
 
   const handleImageSearch = async () => {
@@ -41,7 +55,7 @@ const JewelPixSearchBar = () => {
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       setProducts(res.data.results); // Update products in context
-      setShowPopup(false);
+      handleClosePopup();
     } catch (error) {
       console.error("Image search error:", error);
     } finally {
@@ -49,30 +63,77 @@ const JewelPixSearchBar = () => {
     }
   };
 
-  return (
-    <div className="search-container">
-      <InputGroup className="search">
-        <InputGroup.Text className="search-icon" onClick={handleTextSearch}>
-          <Search size={24} color="#FFD700" />
-        </InputGroup.Text>
-        <Form.Control
-        className="search-input"
-          placeholder="search any jewellery......."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && handleTextSearch()}
-        />
-        <InputGroup.Text className="camera-icon" onClick={() => setShowPopup(true)}>
-          <Camera size={24} color="#FFD700" />
-        </InputGroup.Text>
-      </InputGroup>
+  const triggerFileInput = () => {
+    document.getElementById("fileUploadInput").click();
+  };
 
-      <Modal show={showPopup} onHide={() => setShowPopup(false)} centered>
+  return (
+    <>
+      <div className="search-container">
+        <h1 className="jewelpix-title">JewelPix</h1>
+        <p className="jewelpix-tagline">Snap & find the perfect jewelry instantly</p>
+        <InputGroup className="search">
+          <InputGroup.Text className="search-icon" onClick={handleTextSearch}>
+            <Search size={24} color="#FFD700" />
+          </InputGroup.Text>
+          <Form.Control
+            placeholder="search any jewellery......."
+            className="search-input"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyPress={handleKeyPress}
+          />
+          <InputGroup.Text className="camera-icon" onClick={handleOpenPopup}>
+            <Camera size={24} color="#FFD700" />
+          </InputGroup.Text>
+        </InputGroup>
+      </div>
+
+      <input
+        type="file"
+        id="fileUploadInput"
+        accept="image/*"
+        style={{ display: "none" }}
+        onChange={handleFileChange}
+      />
+
+      <Modal show={showPopup} onHide={handleClosePopup} centered>
         <Modal.Body>
-          {/* Modal Content */}
+          <div className="popup-content d-flex flex-column align-items-center">
+            <Button className="popup-button mb-2" onClick={triggerFileInput}>
+              {image ? "Change Image" : "Upload Image 🖼️"}
+            </Button>
+
+            {image && (
+              <div style={{ textAlign: "center" }}>
+                <img
+                  src={URL.createObjectURL(image)}
+                  alt="preview"
+                  style={{
+                    width: "150px",
+                    height: "150px",
+                    objectFit: "cover",
+                    marginBottom: "10px",
+                  }}
+                />
+              </div>
+            )}
+
+            <Button
+              className="popup-button mb-2"
+              onClick={handleImageSearch}
+              disabled={!image || loading}
+            >
+              {loading ? "Searching..." : "Search by Image"}
+            </Button>
+
+            <Button className="done-button" onClick={handleClosePopup}>
+              Done
+            </Button>
+          </div>
         </Modal.Body>
       </Modal>
-    </div>
+    </>
   );
 };
 
