@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { ProductContext } from "../context/ProductContext.jsx";
 import { Form, InputGroup, Modal, Button } from "react-bootstrap";
 import { Search, Camera } from "lucide-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./styles/JewelPixSearchBar.css";
 
-const JewelPixSearchBar = ({ onSearchResults }) => {
+const JewelPixSearchBar = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { setProducts } = useContext(ProductContext);
   const navigate = useNavigate();
 
   const handleOpenPopup = () => setShowPopup(true);
@@ -22,8 +24,9 @@ const JewelPixSearchBar = ({ onSearchResults }) => {
     if (!searchQuery.trim()) return;
     try {
       setLoading(true);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/search?query=${searchQuery}`);
+      setProducts(res.data); // Update products in context
       navigate(`/?query=${encodeURIComponent(searchQuery)}`);
-      onSearchResults(null); // trigger query search instead of image results
     } catch (error) {
       console.error("Text search failed:", error);
     } finally {
@@ -47,13 +50,11 @@ const JewelPixSearchBar = ({ onSearchResults }) => {
     try {
       setLoading(true);
       const res = await axios.post(
-        `https://tired-kimmie-gajala-sonic-solutions-2de32759.koyeb.app/api/visual-search`,     //https://tired-kimmie-gajala-sonic-solutions-2de32759.koyeb.app
+        `https://tired-kimmie-gajala-sonic-solutions-2de32759.koyeb.app/api/visual-search`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      if (typeof onSearchResults === "function") {
-        onSearchResults(res.data.results); // pass results to LandingCards
-      }
+      setProducts(res.data.results); // Update products in context
       handleClosePopup();
     } catch (error) {
       console.error("Image search error:", error);
@@ -83,7 +84,7 @@ const JewelPixSearchBar = ({ onSearchResults }) => {
             onKeyPress={handleKeyPress}
           />
           <InputGroup.Text className="camera-icon" onClick={handleOpenPopup}>
-            <Camera size={24} color="#FFD700" className="camera" />
+            <Camera size={24} color="#FFD700" />
           </InputGroup.Text>
         </InputGroup>
       </div>

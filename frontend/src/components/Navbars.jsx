@@ -10,7 +10,7 @@ import {
   Nav,
 } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
-import "./styles/NavbarStyles.css"; 
+import "./styles/NavbarStyles.css";
 import { BsCart3 } from "react-icons/bs";
 import { CartContext } from "../context/CartContext.jsx";
 import { WishlistContext } from "../context/WishlistContext.jsx";
@@ -50,33 +50,33 @@ const Navbars = () => {
     // }}
     setShowPopup(true); // Show the popup
   }
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Clear token
+    setIsLogin(false); // Update login state
+    setUser(null); // Clear user data
+    setShowProfileSidebar(false); // Close sidebar
+  };
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const token = localStorage.getItem("token"); // Get the token from local storage
-
-      if (!token) {
-        console.log("No token found");
-        return;
-      }
+      const token = localStorage.getItem("token");
+      if (!token) return;
 
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/user/profile`, {
-          headers: {
-            Authorization: `Bearer ${token}`, // Set Bearer token in header
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
-        setUser(response.data);
-
-
+        setUser(response.data.user);
+        setIsLogin(true); // ✅ Mark as logged in if token is valid
       } catch (error) {
         console.error("Error fetching profile:", error.response?.data || error.message);
+        setIsLogin(false); 
+        setUser(null);
       }
     };
 
     fetchProfile();
-  }, [islogin]);
-
+  }, []);
 
 
 
@@ -175,7 +175,17 @@ const Navbars = () => {
       </Offcanvas>
 
       {/* User Profile Sidebar */}
-      <UserProfileSidebar show={showProfileSidebar} onClose={() => setShowProfileSidebar(false)} />
+      <UserProfileSidebar
+        show={showProfileSidebar}
+        onClose={() => setShowProfileSidebar(false)}
+        onLogout={handleLogout}
+        onLogin={() => {
+          setShowLogin(true);
+          setShowProfileSidebar(false);
+        }}
+        islogin={islogin}
+        user={user}
+      />
 
       {/* Login Modal */}
       {showLogin && (

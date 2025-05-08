@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { ProductContext } from "../context/ProductContext.jsx";
 import Cards from "../components/Cards";
 import ReactPaginate from "react-paginate";
-import "./styles/pagination.css"; // Optional CSS for pagination styling
+import "./styles/pagination.css";
 
 const LandingCards = ({ searchResults }) => {
-  const [filters, setFilters] = useState({ categories: [], brands: [], priceRanges: [] });
+  const { products, filters, fetchProducts, setProducts } = useContext(ProductContext);
   const [selected, setSelected] = useState({ category: "", brand: "", price: "" });
-  const [cards, setCards] = useState([]);
-  const [searchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(0);
   const [pageRange, setPageRange] = useState(window.innerWidth < 768 ? 1 : 3);
+
+  const itemsPerPage = 10;
+  const offset = currentPage * itemsPerPage;
+  const currentCards = (searchResults || products).slice(offset, offset + itemsPerPage);
+  const pageCount = Math.ceil((searchResults || products).length / itemsPerPage);
 
   useEffect(() => {
     const handleResize = () => {
@@ -21,57 +23,10 @@ const LandingCards = ({ searchResults }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const itemsPerPage = 10;
-  const offset = currentPage * itemsPerPage;
-  const currentCards = cards.slice(offset, offset + itemsPerPage);
-  const pageCount = Math.ceil(cards.length / itemsPerPage);
-
-  useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/api/products/filters`)
-      .then((res) => setFilters(res.data))
-      .catch((err) => console.error(err));
-  }, []);
-
-  useEffect(() => {
-    const searchQuery = searchParams.get("query");
-
-    const fetchProducts = async () => {
-      if (searchResults) {
-        setCards(searchResults);
-        return;
-      }
-
-      try {
-        let res;
-        if (searchQuery) {
-          res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/search?query=${searchQuery}`);
-        } else {
-          res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
-        }
-        setCards(res.data);
-        setCurrentPage(0); // reset to page 0 when data changes
-      } catch (err) {
-        console.error("Error fetching products:", err);
-      }
-    };
-
-    fetchProducts();
-  }, [searchParams, searchResults]);
-
   const clearFilters = () => {
     setSelected({ category: "", brand: "", price: "" });
-
-    const searchQuery = searchParams.get("query");
-    const url = searchQuery
-      ? `${import.meta.env.VITE_API_URL}/api/products/search?query=${searchQuery}`
-      : `${import.meta.env.VITE_API_URL}/api/products`;
-
-    axios.get(url)
-      .then((res) => {
-        setCards(res.data);
-        setCurrentPage(0);
-      })
-      .catch((err) => console.error(err));
+    fetchProducts(); // Fetch all products without filters
+    setCurrentPage(0);
   };
 
   const handleApplyFilters = () => {
@@ -84,18 +39,9 @@ const LandingCards = ({ searchResults }) => {
       query.push(`minPrice=${min}&maxPrice=${max}`);
     }
 
-    const searchQuery = searchParams.get("query");
-    if (searchQuery) query.push(`query=${searchQuery}`);
-
     const fullQuery = query.length ? `?${query.join("&")}` : "";
-
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/api/products${fullQuery}`)
-      .then((res) => {
-        setCards(res.data);
-        setCurrentPage(0);
-      })
-      .catch((err) => console.error(err));
+    fetchProducts(fullQuery); // Fetch products with filters
+    setCurrentPage(0);
   };
 
   const handlePageClick = ({ selected }) => {
@@ -156,59 +102,73 @@ const LandingCards = ({ searchResults }) => {
       <div className="cards-wrapper">
         {/* Mobile: horizontal scroll rows */}
         <div className="d-md-none d-flex flex-column gap-4 mt-3">
-          {[0, 1, 2].map((rowIndex) => (
-            <div
-              key={rowIndex}
-              className="cards-row d-flex flex-nowrap overflow-auto gap-3 px-2"
-              style={{ scrollSnapType: 'x mandatory' }}
-            >
-              {currentCards
-                .filter((_, idx) => idx % 3 === rowIndex)
-                .map((item) => (
-                  <Cards
-                    key={item._id}
-                    id={item._id}
-                    image={item.image}
-                    name={item.title}
-                    price={item.price}
-                    stockStatus={item.stock}
-                  />
-                ))}
+          {currentCards.length > 0 ? (
+            [0, 1, 2].map((rowIndex) => (
+              <div
+                key={rowIndex}
+                className="cards-row d-flex flex-nowrap overflow-auto gap-3 px-2"
+                style={{ scrollSnapType: "x mandatory" }}
+              >
+                {currentCards
+                  .filter((_, idx) => idx % 3 === rowIndex)
+                  .map((item) => (
+                    <Cards
+                      key={item._id}
+                      id={item._id}
+                      image={item.image}
+                      name={item.title}
+                      price={item.price}
+                      stockStatus={item.stock}
+                    />
+                  ))}
+              </div>
+            ))
+          ) : (
+            <div className="no-products-found">
+              <p>No similar products found. Please try adjusting your filters or search query.</p>
             </div>
-          ))}
+          )}
         </div>
 
         {/* Desktop: regular grid */}
-        <div className="d-none d-md-flex  cards-div flex-wrap gap-4">
-          {currentCards.map((item) => (
-            <Cards
-              key={item._id}
-              id={item._id}
-              image={item.image}
-              name={item.title}
-              price={item.price}
-              stockStatus={item.stock}
-            />
-          ))}
+        <div className="d-none d-md-flex cards-div flex-wrap gap-4">
+          {currentCards.length === 0 ? (
+            <div className="no-products-found">
+              <p>No similar products found. Please try adjusting your filters or search query.</p>
+            </div>
+          ) : (
+            <div className="d-none d-md-flex  flex-wrap gap-4">
+              {currentCards.map((item) => (
+                <Cards
+                  key={item._id}
+                  id={item._id}
+                  image={item.image}
+                  name={item.title}
+                  price={item.price}
+                  stockStatus={item.stock}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
-
-      <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        pageCount={pageCount}
-        onPageChange={handlePageClick}
-        containerClassName={"pagination"}
-        activeClassName={"active"}
-        previousClassName={"page-btn"}
-        nextClassName={"page-btn"}
-        disabledClassName={"disabled"}
-        breakLabel={"..."}
-        marginPagesDisplayed={1}
-        pageRangeDisplayed={pageRange}
-      />
-
+      {currentCards.length > 0 && (
+        <ReactPaginate
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          pageCount={pageCount}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          activeClassName={"active"}
+          previousClassName={"page-btn"}
+          nextClassName={"page-btn"}
+          disabledClassName={"disabled"}
+          breakLabel={"..."}
+          marginPagesDisplayed={1}
+          pageRangeDisplayed={pageRange}
+        />
+      )}
     </div>
   );
 };

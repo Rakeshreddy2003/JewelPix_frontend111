@@ -24,13 +24,13 @@ import ThankYouPage from './pages/ThankYouPage.jsx';
 
 
 
-// import { ProductsProvider } from './context/ProductsContext.jsx';
+import { ProductProvider } from './context/ProductContext.jsx';
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      {/* <ProductsProvider> */}
+      <ProductProvider>
       <WishlistProvider>
         <CartProvider>
           <Navbar />
@@ -48,7 +48,7 @@ createRoot(document.getElementById('root')).render(
           <Footer />
         </CartProvider>
       </WishlistProvider>
-      {/* </ProductsProvider> */}
+      </ProductProvider>
     </BrowserRouter>
   </StrictMode>,
 );
