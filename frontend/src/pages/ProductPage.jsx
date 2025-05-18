@@ -5,15 +5,14 @@ import { WishlistContext } from '../context/WishlistContext.jsx';
 import { CartContext } from '../context/CartContext';
 import Cards from '../components/Cards';
 import './styles/productPage.css';
+import AddToWishlistButton from '../pages/AddToWishListButton.jsx'; // Note: Consider moving this to components folder for consistency
 
 const ProductPage = () => {
     const { id } = useParams();
     const { addToCart } = useContext(CartContext);
-    const { addToWishlist } = useContext(WishlistContext);
     const [product, setProduct] = useState(null);
     const [similarProducts, setSimilarProducts] = useState([]);
     
-
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/api/products/${id}`)
             .then(res => setProduct(res.data))
@@ -27,20 +26,16 @@ const ProductPage = () => {
     if (!product) return <div style={{ color: "white" }}>Loading...</div>;
 
     const handleAddToCart = () => {
-        const item = { _id: product._id, image: product.image, name: product.title, price: product.price, stockStatus: product.stock, rating: product.rating };
+        const item = { 
+            _id: product._id, 
+            image: product.image, 
+            name: product.title, 
+            price: product.price, 
+            stockStatus: product.stock, 
+            rating: product.rating 
+        };
         addToCart(item);
     };
-
-    const handleAddToWishlist = () => {
-        const item = {
-          _id: product._id,
-          name: product.title,
-          image: product.image,
-          price: product.price
-        };
-        addToWishlist(item);
-      };
-      
 
     return (
         <div style={{ backgroundColor: '#542c41', color: 'white', padding: '2rem', minHeight: '100vh' }}>
@@ -73,18 +68,18 @@ const ProductPage = () => {
                         >
                             {product.stock}
                         </span>
-
-
                     </div>
-
 
                     <h4 style={{ marginTop: '1rem' }}>Product Description</h4>
                     <p style={{ lineHeight: 1.6 }}>{product.description}</p>
 
                     <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem' }}>
                         <button className="add-to-cart-btn h-40 w-60" onClick={handleAddToCart}>Add to cart</button>
-                        <button className="add-to-cart-btn h-40 w-60" onClick={handleAddToWishlist} >Add to wish list</button>
-
+                        {/* Make sure to pass the ID, not the entire product object */}
+                        <AddToWishlistButton 
+                            className="wishtlist-btn" 
+                            productId={product._id}
+                        />
                     </div>
                 </div>
             </div>
@@ -92,22 +87,31 @@ const ProductPage = () => {
             <h3 style={{ marginTop: '4rem', textAlign: 'center' }}>Similar matches for you</h3>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', justifyContent: 'center', marginTop: '1rem' }}>
                 {similarProducts.map((p) => (
-                    <Cards
-                        key={p._id}
-                        id={p._id}
-                        image={p.image}
-                        name={p.title}
-                        price={p.price.toLocaleString()}
-                        stockStatus={p.stock}
-                    />
+                    <div key={p._id} style={{ position: 'relative' }}>
+                        <Cards
+                            id={p._id}
+                            image={p.image}
+                            name={p.title}
+                            price={p.price.toLocaleString()}
+                            stockStatus={p.stock}
+                        />
+                        {/* Add wishlist button to similar products too */}
+                        <AddToWishlistButton 
+                            productId={p._id}
+                            style={{
+                                position: 'absolute',
+                                top: '10px',
+                                right: '10px',
+                                zIndex: 10,
+                                width: '30px',
+                                height: '30px'
+                            }}
+                        />
+                    </div>
                 ))}
             </div>
-
         </div>
     );
 };
-
-
-
 
 export default ProductPage;

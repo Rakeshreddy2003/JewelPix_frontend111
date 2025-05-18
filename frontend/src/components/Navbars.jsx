@@ -31,25 +31,29 @@ const Navbars = () => {
   const [user, setUser] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
 
-
-
   const navigate = useNavigate();
   const { cartItems } = useContext(CartContext);
   const { wishlist } = useContext(WishlistContext);
 
   const totalItems = cartItems.reduce((acc, item) => acc + (item.quantity || 0), 0);
   const totalWishlistItems = wishlist.length;
+  
+  // Function to switch from login to signup
+  const switchToSignup = () => {
+    setShowLogin(false);
+    setShowSignup(true);
+  };
+
+  // Function to switch from signup to login
+  const switchToLogin = () => {
+    setShowSignup(false);
+    setShowLogin(true);
+  };
+  
   const handleCreateClick = () => {
-    // const token = localStorage.getItem("token");
-    // if (!token) {
-    //   alert("Please login first to create.");
-    //   setShowLogin(true); // show login modal
-    //   return;
-    // } else{
-    //   console.log("Token found:", token); // Log the token for debugging
-    // }}
     setShowPopup(true); // Show the popup
   }
+  
   const handleLogout = () => {
     localStorage.removeItem("token"); // Clear token
     setIsLogin(false); // Update login state
@@ -77,8 +81,6 @@ const Navbars = () => {
 
     fetchProfile();
   }, []);
-
-
 
   return (
     <>
@@ -189,21 +191,26 @@ const Navbars = () => {
 
       {/* Login Modal */}
       {showLogin && (
-        <div className="auth-modal">
-          <div className="auth-container">
-            <LoginPage onClose={() => setShowLogin(false)} setIsLogin={setIsLogin} />
-          </div>
+        <div className="auth-modal-overlay">
+          <LoginPage 
+            onClose={() => setShowLogin(false)} 
+            setIsLogin={setIsLogin}
+            switchToSignup={switchToSignup}
+          />
         </div>
       )}
 
       {/* Signup Modal */}
       {showSignup && (
-        <div className="auth-modal">
-          <div className="auth-container">
-            <SignupPage onClose={() => setShowSignup(false)} setIsLogin={setIsLogin} />
-          </div>
+        <div className="auth-modal-overlay">
+          <SignupPage 
+            onClose={() => setShowSignup(false)} 
+            setIsLogin={setIsLogin}
+            switchToLogin={switchToLogin}
+          />
         </div>
       )}
+      
       {showPopup && <Popup onClose={() => setShowPopup(false)} />}
     </>
   );

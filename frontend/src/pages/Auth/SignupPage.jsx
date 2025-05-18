@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
-const SignupPage = ({ onClose,setIsLogin }) => {
+const SignupPage = ({ onClose,setIsLogin, switchToLogin }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
@@ -117,6 +117,12 @@ const SignupPage = ({ onClose,setIsLogin }) => {
         <button className="auth-btn" onClick={handleAuth} disabled={loading}>
           {loading ? "Please wait..." : otpSent ? "Signup" : "Send OTP"}
         </button>
+        <p className="switch-auth mt-3">
+          Already have an account?{" "}
+          <span onClick={switchToLogin} style={{ cursor: "pointer", color: "#007bff" }}>
+            Login
+          </span>
+        </p>
       </div>
     </div>
   );
