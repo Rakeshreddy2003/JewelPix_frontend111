@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import "./AuthModal.css";
 
-const LoginPage = ({ onClose , setIsLogin }) => {
+const LoginPage = ({ onClose , setIsLogin, switchToSignup }) => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
@@ -83,6 +83,12 @@ const LoginPage = ({ onClose , setIsLogin }) => {
         <button className="auth-btn" onClick={handleAuth} disabled={loading}>
           {loading ? "Please wait..." : otpSent ? "Login" : "Send OTP"}
         </button>
+        <p className="auth-footer mt-3">
+          Don't have an account?{" "}
+          <span onClick={switchToSignup} style={{ cursor: "pointer", color: "#007bff" }}>
+            Signup
+          </span>
+        </p>
       </div>
     </div>
   );
