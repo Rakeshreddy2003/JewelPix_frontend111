@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import UploadImagesComponent from "../pages/Uploads/UploadImagesComponent";
+import guidelines from '../assets/jewelpix_guidelines.pdf';
 
 const Popup = ({ onClose }) => {
   const [showUpload, setShowUpload] = useState(false);
@@ -9,8 +10,8 @@ const Popup = ({ onClose }) => {
   };
 
   const handleGuidelinesClick = () => {
-    window.open("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "_blank");
-  };
+    window.open(guidelines, "_blank");
+  }
 
   // 👇 only closes the Upload popup, not the whole thing
   const handleCloseUpload = () => {
